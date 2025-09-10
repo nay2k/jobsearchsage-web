@@ -7,7 +7,7 @@
   - Set up proper type exports in types/job-tracker.d.ts
   - _Requirements: 1.1, 3.1, 4.1_
 
-- [ ] 2. Create Pinia store foundation
+- [x] 2. Create Pinia store foundation
 
   - [x] 2.1 Implement basic useJobApplicationStore structure
 
@@ -29,7 +29,7 @@
     - Test search filtering logic
     - _Requirements: 1.6, 3.7_
 
-- [ ] 3. Build server API endpoints
+- [x] 3. Build server API endpoints
 
   - [x] 3.1 Create job applications API routes structure
 
@@ -45,95 +45,126 @@
     - Add proper error handling and validation
     - _Requirements: 1.2, 2.2, 4.1_
 
-- [ ] 4. Create drag-and-drop composable
+- [x] 4. Create Application Tracker page
 
-  - Implement useDragAndDrop composable with Pinia store integration
-  - Add drag state management (draggedJob, dragOverColumn, isDragging)
-  - Create drag event handlers (handleDragStart, handleDragOver, handleDrop, handleDragEnd)
-  - Include proper error handling for failed drag operations
-  - _Requirements: 2.2, 3.2_
+  - Create basic page structure at /app/pages/application-tracker.vue
+  - Add page title and basic layout using Nuxt UI components
+  - Set up navigation to this page from main dashboard
+  - _Requirements: 1.1, 3.1_
 
-- [ ] 5. Build JobApplicationCard component
+- [ ] 5. Build static Kanban board structure
 
-  - [ ] 5.1 Create basic JobApplicationCard structure
+  - [x] 5.1 Create static KanbanBoard component
 
-    - Implement component with proper props definition using defineProps<{jobApplication: JobApplication}>()
-    - Add drag event handlers and draggable attribute
-    - Display key job application information (company, title, days in stage)
+    - Build basic board layout with hardcoded columns
+    - Create static column headers for each pipeline stage
+    - Add basic responsive grid layout
+    - _Requirements: 3.1, 3.5_
+
+  - [ ] 5.2 Create static JobApplicationCard component
+
+    - Build basic card structure with hardcoded sample data
+    - Display company name, job title, and basic info
+    - Add basic card styling using Nuxt UI
     - _Requirements: 2.1, 3.7_
 
-  - [ ] 5.2 Add JobApplicationCard interactions and styling
-    - Implement drag visual feedback and states
-    - Add click handler to emit openDetails event
-    - Style card with priority badges and status indicators
-    - Add proper TypeScript emits definition
+  - [ ] 5.3 Create static KanbanColumn component
+    - Build column container with header and card area
+    - Add static sample cards to each column
+    - Implement basic column styling and spacing
+    - _Requirements: 3.1, 3.5_
+
+- [ ] 6. Make columns dynamic with real data
+
+  - [ ] 6.1 Connect KanbanBoard to Pinia store
+
+    - Replace hardcoded columns with PIPELINE_STAGES data
+    - Add store initialization and data fetching
+    - Display loading states while fetching data
+    - _Requirements: 2.1, 3.1_
+
+  - [ ] 6.2 Connect KanbanColumn to store data
+    - Make columns display job applications from store by stage
+    - Add job count badges to column headers
+    - Handle empty states when no jobs in a stage
+    - _Requirements: 2.1, 3.5_
+
+- [ ] 7. Make cards dynamic with real data
+
+  - [ ] 7.1 Connect JobApplicationCard to real job data
+
+    - Replace hardcoded data with props from JobApplication interface
+    - Display real company names, job titles, and application dates
+    - Add calculated fields like "days in stage"
+    - _Requirements: 2.1, 3.7_
+
+  - [ ] 7.2 Add search functionality
+    - Implement search input in KanbanBoard header
+    - Connect search to store's setSearchQuery action
+    - Filter displayed cards based on search query
+    - _Requirements: 1.6, 3.7_
+
+- [ ] 8. Add drag and drop functionality
+
+  - [ ] 8.1 Create useDragAndDrop composable
+
+    - Implement drag state management (draggedJob, dragOverColumn, isDragging)
+    - Create drag event handlers (handleDragStart, handleDragOver, handleDrop, handleDragEnd)
+    - Include proper error handling for failed drag operations
+    - _Requirements: 2.2, 3.2_
+
+  - [ ] 8.2 Add drag interactions to components
+    - Make JobApplicationCard draggable with drag event handlers
+    - Add drop zones to KanbanColumn components
+    - Implement visual feedback during drag operations
+    - _Requirements: 2.2, 3.2_
+
+- [ ] 9. Add styling and polish to cards
+
+  - [ ] 9.1 Enhanced card styling
+
+    - Add priority badges and status indicators
+    - Implement hover states and visual feedback
+    - Add proper spacing and typography
+    - _Requirements: 3.7_
+
+  - [ ] 9.2 Add card interactions
+    - Add click handler to open job application details
+    - Implement proper drag visual feedback and states
+    - Add keyboard navigation support for accessibility
     - _Requirements: 2.2, 3.7_
 
-- [ ] 6. Build KanbanColumn component
+- [ ] 10. Create JobApplicationDetailModal
 
-  - [ ] 6.1 Create column structure and drop zones
+  - [ ] 10.1 Build modal structure and form
 
-    - Implement component with defineProps<{stage: PipelineStage, title: string}>()
-    - Add drop zone event handlers (dragover, dragleave, drop)
-    - Display column header with title and job count badge
-    - _Requirements: 2.1, 2.2, 3.1, 3.5_
-
-  - [ ] 6.2 Integrate column with store and drag system
-    - Connect to Pinia store to get job applications for specific stage
-    - Add visual feedback for drag over states
-    - Implement scroll handling for many job cards
-    - Style column with proper spacing and responsive design
-    - _Requirements: 2.2, 3.2, 3.5_
-
-- [ ] 7. Build KanbanBoard main component
-
-  - [ ] 7.1 Create board layout and structure
-
-    - Implement main container component without props (uses Pinia store directly)
-    - Create responsive CSS Grid layout for columns
-    - Add search input connected to store's setSearchQuery action
-    - _Requirements: 1.6, 3.1, 3.5_
-
-  - [ ] 7.2 Integrate board with drag system and store
-    - Connect useDragAndDrop composable for coordinating drag operations
-    - Add error handling with toast notifications
-    - Implement loading states and error display
-    - Wire up all PIPELINE_STAGES to create columns dynamically
-    - _Requirements: 2.2, 3.2, 3.5_
-
-- [ ] 8. Create JobApplicationDetailModal component
-
-  - [ ] 8.1 Build modal structure and form
-
-    - Implement component with defineProps<{jobApplicationId: string | null}>() and defineModel<boolean>() for isOpen
-    - Create form for editing job application details with proper validation
-    - Display job application information, stage history, and notes
+    - Implement component with proper props for job application ID
+    - Create form for editing job application details with validation
+    - Display job application information and stage history
     - _Requirements: 4.1, 4.2, 4.6_
 
-  - [ ] 8.2 Add modal functionality and integration
+  - [ ] 10.2 Add modal functionality and integration
     - Connect to Pinia store to get job application data by ID
     - Implement save functionality using store's updateJobApplication action
     - Add notes and communication history display with add/edit capabilities
-    - Include proper form validation and error handling
     - _Requirements: 4.1, 4.2, 4.6_
 
-- [ ] 9. Wire everything together and add final features
+- [ ] 11. Final integration and polish
 
-  - [ ] 9.1 Create main page integration
+  - [ ] 11.1 Wire modal to board interactions
 
-    - Set up page component that uses KanbanBoard
-    - Add job application creation functionality (floating action button or header button)
-    - Connect JobApplicationDetailModal to board interactions
-    - _Requirements: 1.1, 1.2, 3.1_
+    - Connect JobApplicationDetailModal to card click events
+    - Add job application creation functionality (floating action button)
+    - Implement proper modal state management
+    - _Requirements: 1.2, 4.1_
 
-  - [ ] 9.2 Add polish and final integrations
-    - Implement proper loading states throughout the application
-    - Add toast notifications for all user actions
+  - [ ] 11.2 Add final polish and error handling
+    - Implement toast notifications for all user actions
+    - Add comprehensive loading states throughout the application
     - Test complete user workflows (create, edit, drag, delete job applications)
-    - Add keyboard navigation support for accessibility
-    - _Requirements: 1.6, 2.2, 3.7, 4.6_
+    - _Requirements: 1.6, 2.2, 4.6_
 
-- [ ] 10. Testing and validation
+- [ ] 12. Testing and validation
   - Write unit tests for Pinia store actions and getters
   - Test drag-and-drop functionality across different scenarios
   - Validate API endpoints with proper error cases
