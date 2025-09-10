@@ -31,14 +31,14 @@
 
 - [ ] 3. Build server API endpoints
 
-  - [ ] 3.1 Create job applications API routes structure
+  - [x] 3.1 Create job applications API routes structure
 
     - Implement GET /api/job-applications (fetch all job applications)
     - Implement POST /api/job-applications (create new job application)
     - Add proper TypeScript types for API responses
     - _Requirements: 1.1, 1.2_
 
-  - [ ] 3.2 Add individual job application management endpoints
+  - [x] 3.2 Add individual job application management endpoints
     - Implement GET /api/job-applications/[id] (fetch specific job application)
     - Implement PATCH /api/job-applications/[id] (update job application, including stage changes)
     - Implement DELETE /api/job-applications/[id] (delete job application)

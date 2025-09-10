@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "title": "Senior Frontend Developer",
+    "company": "TechCorp Inc.",
+    "location": "San Francisco, CA",
+    "url": "https://techcorp.com/careers/senior-frontend",
+    "description": "Looking for an experienced frontend developer to join our team...",
+    "salaryRange": "$120,000 - $150,000",
+    "applicationDeadline": "2024-12-15T00:00:00.000Z",
+    "stage": "interview",
+    "dateAdded": "2024-11-01T00:00:00.000Z",
+    "notes": [
+      {
+        "id": "n1",
+        "content": "Great company culture, strong engineering team",
+        "timestamp": "2024-11-01T00:00:00.000Z",
+        "type": "research"
+      }
+    ],
+    "communications": [],
+    "tags": [
+      "frontend",
+      "react",
+      "typescript"
+    ],
+    "priority": "high",
+    "source": "LinkedIn",
+    "stageHistory": [
+      {
+        "id": "st1",
+        "fromStage": null,
+        "toStage": "researched",
+        "timestamp": "2024-11-01T00:00:00.000Z",
+        "notes": "Found this position on LinkedIn"
+      },
+      {
+        "id": "st2",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2024-11-03T00:00:00.000Z",
+        "notes": "Submitted application through company website"
+      },
+      {
+        "id": "st_1757508183489_qeh5h0o",
+        "fromStage": "applied",
+        "toStage": "interview",
+        "timestamp": "2025-09-10T12:43:03.489Z",
+        "notes": "Stage updated via API"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Full Stack Engineer",
+    "company": "StartupXYZ",
+    "location": "Remote",
+    "url": "https://startupxyz.com/jobs/fullstack",
+    "salaryRange": "$90,000 - $120,000",
+    "stage": "phone_screen",
+    "dateAdded": "2024-10-28T00:00:00.000Z",
+    "notes": [],
+    "communications": [],
+    "tags": [
+      "fullstack",
+      "node",
+      "react"
+    ],
+    "priority": "medium",
+    "source": "Company Website"
+  }
+]

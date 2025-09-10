@@ -1,0 +1,16 @@
+[
+  {
+    "id": "n1",
+    "jobApplicationId": "1",
+    "content": "Great company culture, strong engineering team",
+    "timestamp": "2024-11-01T00:00:00.000Z",
+    "type": "research"
+  },
+  {
+    "id": "n2",
+    "jobApplicationId": "2",
+    "content": "Fast-growing startup, equity opportunity",
+    "timestamp": "2024-10-28T00:00:00.000Z",
+    "type": "research"
+  }
+]
