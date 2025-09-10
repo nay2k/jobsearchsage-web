@@ -16,7 +16,7 @@ components/
     ├── JobApplicationCard.vue    # Draggable job application cards
     └── JobApplicationDetailModal.vue # Detailed application view
 stores/
-└── jobApplicationPipeline.ts     # Pinia store for job application pipeline state and API calls
+└── useJobApplicationStore.ts     # Pinia store for job application pipeline state and API calls
 composables/
 └── useDragAndDrop.ts             # Drag-and-drop logic composable
 types/
@@ -48,7 +48,7 @@ Main container component that orchestrates the entire pipeline view. Uses Pinia 
 
 - Responsive column layout using CSS Grid
 - Global search and filtering
-- Integrates with `useJobPipelineStore()` for state management
+- Integrates with `useJobApplicationStore()` for state management
 - Handles drag-and-drop coordination between columns
 
 #### KanbanColumn.vue
@@ -128,174 +128,169 @@ const isOpen = defineModel<boolean>();
 
 ### Pinia Store Design
 
-#### useJobApplicationPipelineStore
+#### useJobApplicationStore
 
 Central store for managing job application pipeline state and API interactions.
 
 ```typescript
-// stores/jobApplicationPipeline.ts
-export const useJobApplicationPipelineStore = defineStore(
-  'jobApplicationPipeline',
-  () => {
-    // State
-    const jobApplications = ref<JobApplication[]>([]);
-    const loading = ref(false);
-    const error = ref<string | null>(null);
-    const searchQuery = ref('');
-    const selectedJobApplicationId = ref<string | null>(null);
+// stores/useJobApplicationStore.ts
+export const useJobApplicationStore = defineStore('jobApplication', () => {
+  // State
+  const jobApplications = ref<JobApplication[]>([]);
+  const loading = ref(false);
+  const error = ref<string | null>(null);
+  const searchQuery = ref('');
+  const selectedJobApplicationId = ref<string | null>(null);
 
-    // Getters
-    const jobApplicationsByStage = computed(() => {
-      const filtered = jobApplications.value.filter(
-        (jobApplication) =>
-          jobApplication.title
-            .toLowerCase()
-            .includes(searchQuery.value.toLowerCase()) ||
-          jobApplication.company
-            .toLowerCase()
-            .includes(searchQuery.value.toLowerCase())
-      );
-
-      return PIPELINE_STAGES.reduce((acc, stage) => {
-        acc[stage] = filtered.filter(
-          (jobApplication) => jobApplication.stage === stage
-        );
-        return acc;
-      }, {} as Record<PipelineStage, JobApplication[]>);
-    });
-
-    const selectedJobApplication = computed(() =>
-      selectedJobApplicationId.value
-        ? jobApplications.value.find(
-            (jobApplication) =>
-              jobApplication.id === selectedJobApplicationId.value
-          )
-        : null
+  // Getters
+  const jobApplicationsByStage = computed(() => {
+    const filtered = jobApplications.value.filter(
+      (jobApplication) =>
+        jobApplication.title
+          .toLowerCase()
+          .includes(searchQuery.value.toLowerCase()) ||
+        jobApplication.company
+          .toLowerCase()
+          .includes(searchQuery.value.toLowerCase())
     );
 
-    const jobApplicationCount = computed(() => jobApplications.value.length);
+    return PIPELINE_STAGES.reduce((acc, stage) => {
+      acc[stage] = filtered.filter(
+        (jobApplication) => jobApplication.stage === stage
+      );
+      return acc;
+    }, {} as Record<PipelineStage, JobApplication[]>);
+  });
+
+  const selectedJobApplication = computed(() =>
+    selectedJobApplicationId.value
+      ? jobApplications.value.find(
+          (jobApplication) =>
+            jobApplication.id === selectedJobApplicationId.value
+        )
+      : null
+  );
+
+  const jobApplicationCount = computed(() => jobApplications.value.length);
+
+  // Actions
+  async function fetchJobApplications() {
+    loading.value = true;
+    error.value = null;
+
+    try {
+      const response = await $fetch<JobApplication[]>('/api/job-applications');
+      jobApplications.value = response;
+    } catch (err) {
+      error.value = 'Failed to fetch job applications';
+      throw err;
+    } finally {
+      loading.value = false;
+    }
+  }
+
+  async function createJobApplication(
+    jobApplicationData: Omit<
+      JobApplication,
+      'id' | 'dateAdded' | 'stageHistory'
+    >
+  ) {
+    try {
+      const newJobApplication = await $fetch<JobApplication>(
+        '/api/job-applications',
+        {
+          method: 'POST',
+          body: jobApplicationData,
+        }
+      );
+      jobApplications.value.push(newJobApplication);
+      return newJobApplication;
+    } catch (err) {
+      error.value = 'Failed to create job';
+      throw err;
+    }
+  }
+
+  async function updateJobStage(jobId: string, newStage: PipelineStage) {
+    const jobIndex = jobs.value.findIndex((job) => job.id === jobId);
+    if (jobIndex === -1) return;
+
+    // Optimistic update
+    const oldStage = jobs.value[jobIndex].stage;
+    jobs.value[jobIndex].stage = newStage;
+
+    try {
+      const updatedJob = await $fetch<Job>(`/api/jobs/${jobId}`, {
+        method: 'PATCH',
+        body: { stage: newStage },
+      });
+      jobs.value[jobIndex] = updatedJob;
+    } catch (err) {
+      // Revert optimistic update
+      jobs.value[jobIndex].stage = oldStage;
+      error.value = 'Failed to update job stage';
+      throw err;
+    }
+  }
+
+  async function updateJob(jobId: string, updates: Partial<Job>) {
+    try {
+      const updatedJob = await $fetch<Job>(`/api/jobs/${jobId}`, {
+        method: 'PATCH',
+        body: updates,
+      });
+      const jobIndex = jobs.value.findIndex((job) => job.id === jobId);
+      if (jobIndex !== -1) {
+        jobs.value[jobIndex] = updatedJob;
+      }
+      return updatedJob;
+    } catch (err) {
+      error.value = 'Failed to update job';
+      throw err;
+    }
+  }
+
+  async function deleteJob(jobId: string) {
+    try {
+      await $fetch(`/api/jobs/${jobId}`, { method: 'DELETE' });
+      jobs.value = jobs.value.filter((job) => job.id !== jobId);
+    } catch (err) {
+      error.value = 'Failed to delete job';
+      throw err;
+    }
+  }
+
+  function setSearchQuery(query: string) {
+    searchQuery.value = query;
+  }
+
+  function selectJob(jobId: string | null) {
+    selectedJobId.value = jobId;
+  }
+
+  return {
+    // State
+    jobs: readonly(jobs),
+    loading: readonly(loading),
+    error: readonly(error),
+    searchQuery: readonly(searchQuery),
+    selectedJobId: readonly(selectedJobId),
+
+    // Getters
+    jobsByStage,
+    selectedJob,
+    jobCount,
 
     // Actions
-    async function fetchJobApplications() {
-      loading.value = true;
-      error.value = null;
-
-      try {
-        const response = await $fetch<JobApplication[]>(
-          '/api/job-applications'
-        );
-        jobApplications.value = response;
-      } catch (err) {
-        error.value = 'Failed to fetch job applications';
-        throw err;
-      } finally {
-        loading.value = false;
-      }
-    }
-
-    async function createJobApplication(
-      jobApplicationData: Omit<
-        JobApplication,
-        'id' | 'dateAdded' | 'stageHistory'
-      >
-    ) {
-      try {
-        const newJobApplication = await $fetch<JobApplication>(
-          '/api/job-applications',
-          {
-            method: 'POST',
-            body: jobApplicationData,
-          }
-        );
-        jobApplications.value.push(newJobApplication);
-        return newJobApplication;
-      } catch (err) {
-        error.value = 'Failed to create job';
-        throw err;
-      }
-    }
-
-    async function updateJobStage(jobId: string, newStage: PipelineStage) {
-      const jobIndex = jobs.value.findIndex((job) => job.id === jobId);
-      if (jobIndex === -1) return;
-
-      // Optimistic update
-      const oldStage = jobs.value[jobIndex].stage;
-      jobs.value[jobIndex].stage = newStage;
-
-      try {
-        const updatedJob = await $fetch<Job>(`/api/jobs/${jobId}`, {
-          method: 'PATCH',
-          body: { stage: newStage },
-        });
-        jobs.value[jobIndex] = updatedJob;
-      } catch (err) {
-        // Revert optimistic update
-        jobs.value[jobIndex].stage = oldStage;
-        error.value = 'Failed to update job stage';
-        throw err;
-      }
-    }
-
-    async function updateJob(jobId: string, updates: Partial<Job>) {
-      try {
-        const updatedJob = await $fetch<Job>(`/api/jobs/${jobId}`, {
-          method: 'PATCH',
-          body: updates,
-        });
-        const jobIndex = jobs.value.findIndex((job) => job.id === jobId);
-        if (jobIndex !== -1) {
-          jobs.value[jobIndex] = updatedJob;
-        }
-        return updatedJob;
-      } catch (err) {
-        error.value = 'Failed to update job';
-        throw err;
-      }
-    }
-
-    async function deleteJob(jobId: string) {
-      try {
-        await $fetch(`/api/jobs/${jobId}`, { method: 'DELETE' });
-        jobs.value = jobs.value.filter((job) => job.id !== jobId);
-      } catch (err) {
-        error.value = 'Failed to delete job';
-        throw err;
-      }
-    }
-
-    function setSearchQuery(query: string) {
-      searchQuery.value = query;
-    }
-
-    function selectJob(jobId: string | null) {
-      selectedJobId.value = jobId;
-    }
-
-    return {
-      // State
-      jobs: readonly(jobs),
-      loading: readonly(loading),
-      error: readonly(error),
-      searchQuery: readonly(searchQuery),
-      selectedJobId: readonly(selectedJobId),
-
-      // Getters
-      jobsByStage,
-      selectedJob,
-      jobCount,
-
-      // Actions
-      fetchJobs,
-      createJob,
-      updateJobStage,
-      updateJob,
-      deleteJob,
-      setSearchQuery,
-      selectJob,
-    };
-  }
-);
+    fetchJobs,
+    createJob,
+    updateJobStage,
+    updateJob,
+    deleteJob,
+    setSearchQuery,
+    selectJob,
+  };
+});
 ```
 
 ### Drag and Drop Implementation
@@ -305,7 +300,7 @@ Using Vue's native drag events with custom composable that integrates with Pinia
 ```typescript
 // composables/useDragAndDrop.ts
 export const useDragAndDrop = () => {
-  const jobApplicationPipelineStore = useJobApplicationPipelineStore();
+  const jobApplicationStore = useJobApplicationStore();
   const draggedJobApplication = ref<JobApplication | null>(null);
   const dragOverColumn = ref<PipelineStage | null>(null);
   const isDragging = ref(false);
@@ -329,7 +324,7 @@ export const useDragAndDrop = () => {
       draggedJobApplication.value.stage !== targetStage
     ) {
       try {
-        await jobApplicationPipelineStore.updateJobApplicationStage(
+        await jobApplicationStore.updateJobApplicationStage(
           draggedJobApplication.value.id,
           targetStage
         );
@@ -432,11 +427,11 @@ Error handling is centralized in the Pinia store with toast notifications:
 ```typescript
 // In components using the store
 <script setup lang="ts">
-const jobPipelineStore = useJobPipelineStore()
+const jobApplicationStore = useJobApplicationStore()
 const toast = useToast()
 
 // Watch for errors and show toast notifications
-watch(() => jobPipelineStore.error, (error) => {
+watch(() => jobApplicationStore.error, (error) => {
   if (error) {
     toast.add({
       title: 'Error',
@@ -449,7 +444,7 @@ watch(() => jobPipelineStore.error, (error) => {
 // Handle specific actions with try-catch for additional error handling
 const handleCreateJob = async (jobData: Omit<Job, 'id' | 'dateAdded' | 'stageHistory'>) => {
   try {
-    await jobPipelineStore.createJob(jobData)
+    await jobApplicationStore.createJobApplication(jobData)
     toast.add({
       title: 'Job created successfully',
       color: 'green'
@@ -514,7 +509,7 @@ export default defineEventHandler(async (event) => {
 
 **Store Tests:**
 
-- useJobPipelineStore state management and API calls
+- useJobApplicationStore state management and API calls
 - Error handling and optimistic updates
 - Computed properties (jobsByStage, selectedJob)
 

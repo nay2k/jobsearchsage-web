@@ -15,11 +15,13 @@
     "@iconify-json/lucide": "^1.2.64",
     "@iconify-json/simple-icons": "^1.2.49",
     "@nuxt/ui": "^4.0.0-alpha.1",
+    "@pinia/nuxt": "^0.11.2",
     "@unovis/ts": "^1.6.0",
     "@unovis/vue": "^1.6.0",
     "@vueuse/nuxt": "^13.7.0",
     "date-fns": "^4.1.0",
     "nuxt": "^4.0.3",
+    "pinia": "^3.0.3",
     "zod": "^3.25.76"
   },
   "devDependencies": {

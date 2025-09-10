@@ -17,7 +17,6 @@ The Job Application Tracker provides a systematic Kanban-style pipeline manageme
 3. WHEN job applications are added THEN the system SHALL automatically assign them to the "Researched" stage
 4. WHEN managing job applications THEN the system SHALL allow editing of application details and information
 5. WHEN job applications are no longer relevant THEN the system SHALL allow removal or archiving
-6. WHEN viewing job applications THEN the system SHALL display them in an organized, searchable list
 
 ### Requirement 2: Pipeline Stage Progression
 

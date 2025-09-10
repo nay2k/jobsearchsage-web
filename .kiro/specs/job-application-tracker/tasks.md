@@ -9,14 +9,14 @@
 
 - [ ] 2. Create Pinia store foundation
 
-  - [-] 2.1 Implement basic useJobApplicationStore structure
+  - [x] 2.1 Implement basic useJobApplicationStore structure
 
     - Set up store with initial state (jobApplications, loading, error, searchQuery, selectedJobApplicationId)
     - Implement basic getters (jobApplicationsByStage, selectedJobApplication, jobApplicationCount)
-    - Create store file in stores/jobApplicationPipeline.ts
+    - Create store file in stores/useJobApplicationStore.ts
     - _Requirements: 1.1, 2.1, 3.1_
 
-  - [ ] 2.2 Add CRUD actions to store
+  - [x] 2.2 Add CRUD actions to store
 
     - Implement fetchJobApplications, createJobApplication, updateJobApplication, deleteJobApplication actions
     - Add proper error handling and loading states
