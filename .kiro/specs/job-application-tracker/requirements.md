@@ -12,12 +12,12 @@ The Job Application Tracker provides a systematic Kanban-style pipeline manageme
 
 #### Acceptance Criteria
 
-1. WHEN a user finds a job opportunity THEN the system SHALL allow manual addition with company, role, and status information
-2. WHEN adding jobs THEN the system SHALL capture job title, company name, location, salary range, and application deadline
-3. WHEN jobs are added THEN the system SHALL automatically assign them to the "Researched" stage
-4. WHEN managing jobs THEN the system SHALL allow editing of job details and information
-5. WHEN jobs are no longer relevant THEN the system SHALL allow removal or archiving
-6. WHEN viewing jobs THEN the system SHALL display them in an organized, searchable list
+1. WHEN a user finds a job opportunity THEN the system SHALL allow manual addition of job application with company, role, and status information
+2. WHEN adding job applications THEN the system SHALL capture job title, company name, location, salary range, and application deadline
+3. WHEN job applications are added THEN the system SHALL automatically assign them to the "Researched" stage
+4. WHEN managing job applications THEN the system SHALL allow editing of application details and information
+5. WHEN job applications are no longer relevant THEN the system SHALL allow removal or archiving
+6. WHEN viewing job applications THEN the system SHALL display them in an organized, searchable list
 
 ### Requirement 2: Pipeline Stage Progression
 
@@ -25,13 +25,13 @@ The Job Application Tracker provides a systematic Kanban-style pipeline manageme
 
 #### Acceptance Criteria
 
-1. WHEN jobs are in the pipeline THEN the system SHALL support stage progression (Researched → Applied → Phone Screen → Interview → Final → Offer) displayed as Kanban columns
-2. WHEN moving jobs between stages THEN the system SHALL provide intuitive drag-and-drop interface for moving job cards between columns
+1. WHEN job applications are in the pipeline THEN the system SHALL support stage progression (Researched → Applied → Phone Screen → Interview → Final → Offer) displayed as Kanban columns
+2. WHEN moving job applications between stages THEN the system SHALL provide intuitive drag-and-drop interface for moving application cards between columns
 3. WHEN stage changes occur THEN the system SHALL automatically timestamp the transitions
-4. WHEN jobs move stages THEN the system SHALL trigger appropriate follow-up reminders
-5. WHEN viewing pipeline THEN the system SHALL display jobs in a Kanban board with columns for each stage
+4. WHEN job applications move stages THEN the system SHALL trigger appropriate follow-up reminders
+5. WHEN viewing pipeline THEN the system SHALL display job applications in a Kanban board with columns for each stage
 6. WHEN stages are updated THEN the system SHALL maintain a complete history of status changes
-7. WHEN using the Kanban interface THEN the system SHALL show job cards with key information (company, role, days in stage)
+7. WHEN using the Kanban interface THEN the system SHALL show application cards with key information (company, role, days in stage)
 8. WHEN viewing the board THEN the system SHALL allow collapsing/expanding columns and filtering by various criteria
 
 ### Requirement 3: Kanban Board Interface Design
@@ -41,12 +41,12 @@ The Job Application Tracker provides a systematic Kanban-style pipeline manageme
 #### Acceptance Criteria
 
 1. WHEN viewing the main tracker THEN the system SHALL display a horizontal Kanban board with columns for each pipeline stage
-2. WHEN jobs are displayed THEN the system SHALL show them as cards containing company name, job title, application date, and days in current stage
-3. WHEN interacting with job cards THEN the system SHALL support drag-and-drop movement between columns with visual feedback
-4. WHEN columns have many jobs THEN the system SHALL provide scrolling within columns while maintaining column headers visible
-5. WHEN viewing the board THEN the system SHALL show job count badges on each column header
+2. WHEN job applications are displayed THEN the system SHALL show them as cards containing company name, job title, application date, and days in current stage
+3. WHEN interacting with application cards THEN the system SHALL support drag-and-drop movement between columns with visual feedback
+4. WHEN columns have many applications THEN the system SHALL provide scrolling within columns while maintaining column headers visible
+5. WHEN viewing the board THEN the system SHALL show application count badges on each column header
 6. WHEN cards are moved THEN the system SHALL provide smooth animations and immediate visual feedback
-7. WHEN clicking on job cards THEN the system SHALL open detailed view with full job information and history
+7. WHEN clicking on application cards THEN the system SHALL open detailed view with full application information and history
 
 ### Requirement 4: Notes and Communication Tracking
 
@@ -54,9 +54,9 @@ The Job Application Tracker provides a systematic Kanban-style pipeline manageme
 
 #### Acceptance Criteria
 
-1. WHEN managing applications THEN the system SHALL allow notes and communication history tracking for each job
+1. WHEN managing applications THEN the system SHALL allow notes and communication history tracking for each job application
 2. WHEN adding notes THEN the system SHALL timestamp and organize entries chronologically
 3. WHEN tracking communications THEN the system SHALL record email exchanges, phone calls, and meeting details
-4. WHEN viewing job details THEN the system SHALL display complete interaction history
+4. WHEN viewing application details THEN the system SHALL display complete interaction history
 5. WHEN preparing for interviews THEN the system SHALL provide easy access to all previous communications and notes
 6. WHEN searching information THEN the system SHALL allow full-text search across all notes and communication records
