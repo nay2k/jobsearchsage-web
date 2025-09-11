@@ -11,6 +11,10 @@ useSeoMeta({
   description:
     'Manage your job applications with our Kanban-style pipeline tracker',
 });
+
+// Get slideover state for layout adjustment
+const { isJobApplicationSlideoverOpen, closeJobApplicationSlideover } =
+  useJobApplicationTracker();
 </script>
 
 <template>
@@ -35,8 +39,22 @@ useSeoMeta({
     </template>
 
     <template #body>
-      <!-- Kanban Board -->
-      <ApplicationTrackerKanbanBoard />
+      <div class="flex h-full">
+        <!-- Main content area -->
+        <div
+          class="flex-1 transition-all duration-300 ease-in-out"
+          :class="{
+            'mr-[30%]': isJobApplicationSlideoverOpen,
+            'mr-0': !isJobApplicationSlideoverOpen,
+          }"
+        >
+          <!-- Kanban Board -->
+          <ApplicationTrackerKanbanBoard />
+        </div>
+
+        <!-- Job Application Detail Slideover -->
+        <ApplicationTrackerJobApplicationDetailSlideover />
+      </div>
     </template>
   </UDashboardPanel>
 </template>

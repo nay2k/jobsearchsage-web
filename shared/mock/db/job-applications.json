@@ -8,7 +8,7 @@
     "description": "Looking for an experienced frontend developer to join our team...",
     "salaryRange": "$120,000 - $150,000",
     "applicationDeadline": "2025-09-20T00:00:00.000Z",
-    "stage": "interview",
+    "stage": "phone_screen",
     "dateAdded": "2025-09-01T00:00:00.000Z",
     "notes": [
       {
@@ -61,6 +61,41 @@
         "toStage": "interview",
         "timestamp": "2025-09-11T16:43:07.330Z",
         "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757610328475_cyl6l32",
+        "fromStage": "interview",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T17:05:28.475Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757610328662_dqww3ms",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T17:05:28.662Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757610328929_k6hya6x",
+        "fromStage": "applied",
+        "toStage": "researched",
+        "timestamp": "2025-09-11T17:05:28.929Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757610329084_03z6ee9",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T17:05:29.084Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757610329166_qfcvv8y",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T17:05:29.166Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -71,7 +106,7 @@
     "location": "Remote",
     "url": "https://startupxyz.com/jobs/fullstack",
     "salaryRange": "$90,000 - $120,000",
-    "stage": "applied",
+    "stage": "phone_screen",
     "dateAdded": "2025-09-05T00:00:00.000Z",
     "notes": [
       {
@@ -194,6 +229,13 @@
         "fromStage": "phone_screen",
         "toStage": "applied",
         "timestamp": "2025-09-11T16:42:45.214Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757610326336_eenfasb",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T17:05:26.336Z",
         "notes": "Stage updated via API"
       }
     ]

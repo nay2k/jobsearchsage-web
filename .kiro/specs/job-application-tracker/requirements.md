@@ -45,7 +45,7 @@ The Job Application Tracker provides a systematic Kanban-style pipeline manageme
 4. WHEN columns have many applications THEN the system SHALL provide scrolling within columns while maintaining column headers visible
 5. WHEN viewing the board THEN the system SHALL show application count badges on each column header
 6. WHEN cards are moved THEN the system SHALL provide smooth animations and immediate visual feedback
-7. WHEN clicking on application cards THEN the system SHALL open detailed view with full application information and history
+7. WHEN clicking on application cards THEN the system SHALL open detailed view in a slideover drawer with full application information and history
 
 ### Requirement 4: Notes and Communication Tracking
 

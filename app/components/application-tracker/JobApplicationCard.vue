@@ -215,17 +215,25 @@ const hasRecentActivity = computed(() => {
 
   return recentNotes || recentCommunications;
 });
+
+// Handle card click to open slideover
+const { openJobApplicationSlideover } = useJobApplicationTracker();
+
+function handleCardClick() {
+  openJobApplicationSlideover(props.jobApplication.id);
+}
 </script>
 
 <template>
   <UCard
-    class="group cursor-move transition-all duration-200 ease-in-out hover:shadow-lg hover:shadow-gray-200/50 dark:hover:shadow-gray-800/50 border border-gray-200 dark:border-gray-700 hover:border-transparent bg-white dark:bg-gray-900 relative"
+    class="group cursor-pointer transition-all duration-200 ease-in-out hover:shadow-lg hover:shadow-gray-200/50 dark:hover:shadow-gray-800/50 border border-gray-200 dark:border-gray-700 hover:border-transparent bg-white dark:bg-gray-900 relative"
     :class="{
       'ring-2 ring-red-200 dark:ring-red-800 border-red-300 dark:border-red-700':
         deadlineWarning?.urgent,
       'ring-1 ring-blue-200 dark:ring-blue-800': hasRecentActivity,
       'hover:ring-2 hover:ring-green-200 dark:hover:ring-green-800': true,
     }"
+    @click="handleCardClick"
   >
     <!-- Card Content with improved spacing -->
     <div class="p-2">

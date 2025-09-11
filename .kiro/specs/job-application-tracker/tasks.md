@@ -134,16 +134,16 @@
     - Add keyboard navigation support for accessibility
     - _Requirements: 2.2, 3.7_
 
-- [ ] 10. Create JobApplicationDetailModal
+- [ ] 10. Create JobApplicationDetailSlideover
 
-  - [ ] 10.1 Build modal structure and form
+  - [x] 10.1 Build slideover structure and form
 
     - Implement component with proper props for job application ID
     - Create form for editing job application details with validation
     - Display job application information and stage history
     - _Requirements: 4.1, 4.2, 4.6_
 
-  - [ ] 10.2 Add modal functionality and integration
+  - [ ] 10.2 Add slideover functionality and integration
     - Connect to Pinia store to get job application data by ID
     - Implement save functionality using store's updateJobApplication action
     - Add notes and communication history display with add/edit capabilities
@@ -151,11 +151,11 @@
 
 - [ ] 11. Final integration and polish
 
-  - [ ] 11.1 Wire modal to board interactions
+  - [ ] 11.1 Wire slideover to board interactions
 
-    - Connect JobApplicationDetailModal to card click events
+    - Connect JobApplicationDetailSlideover to card click events
     - Add job application creation functionality (floating action button)
-    - Implement proper modal state management
+    - Implement proper slideover state management
     - _Requirements: 1.2, 4.1_
 
   - [ ] 11.2 Add final polish and error handling
