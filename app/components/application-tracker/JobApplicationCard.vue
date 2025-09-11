@@ -103,7 +103,7 @@ const deadlineWarning = computed(() => {
 
 <template>
   <UCard
-    class="cursor-pointer hover:shadow-md transition-shadow duration-200 border border-gray-200 dark:border-gray-700 p-4"
+    class="cursor-move hover:shadow-md transition-shadow duration-200 border border-gray-200 dark:border-gray-700 p-4"
   >
     <!-- Card Header with Company and Priority -->
     <div class="flex items-start justify-between mb-3">
@@ -118,7 +118,7 @@ const deadlineWarning = computed(() => {
         </p>
       </div>
       <div class="flex flex-col items-end gap-1 ml-2 flex-shrink-0">
-        <UBadge :color="priorityColor" variant="soft" size="sm">
+        <UBadge :color="priorityColor" variant="soft" size="md">
           {{ jobApplication.priority }}
         </UBadge>
         <UBadge

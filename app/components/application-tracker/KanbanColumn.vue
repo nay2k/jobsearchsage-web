@@ -1,21 +1,42 @@
 <script setup lang="ts">
-import type { PipelineStage } from '#shared/types/job-tracker';
-import { useJobApplicationStore } from '~/stores/useJobApplicationStore';
-import { storeToRefs } from 'pinia';
+import type { PipelineStage, JobApplication } from '#shared/types/job-tracker';
+import { useDragAndDrop } from '@formkit/drag-and-drop/vue';
 import JobApplicationCard from './JobApplicationCard.vue';
 
 const props = defineProps<{
   stage: PipelineStage;
   title: string;
+  applications: JobApplication[];
 }>();
 
-// Get store data
-const jobApplicationStore = useJobApplicationStore();
-const { jobApplicationsByStage } = storeToRefs(jobApplicationStore);
+const emit = defineEmits<{
+  moveApplication: [application: JobApplication, targetStage: PipelineStage];
+}>();
 
-// Get applications for this specific stage
-const stageApplications = computed(
-  () => jobApplicationsByStage.value[props.stage] || []
+// Set up FormKit drag and drop with built-in onTransfer event
+const [columnRef, applications] = useDragAndDrop(props.applications, {
+  group: 'kanban', // All columns share the same group for transferability
+  onTransfer: (event: any) => {
+    console.log('Transfer event:', event);
+
+    // When an item is transferred TO this column
+    if (event.targetData && event.targetData.parent === columnRef.value) {
+      const transferredItem = event.data as JobApplication;
+      console.log(`Item transferred to ${props.stage}:`, transferredItem.title);
+
+      // Emit event to parent to handle the API call
+      emit('moveApplication', transferredItem, props.stage);
+    }
+  },
+});
+
+// Watch for changes in props and update the applications array
+watch(
+  () => props.applications,
+  (newApplications) => {
+    applications.value = [...newApplications];
+  },
+  { immediate: true }
 );
 </script>
 
@@ -32,7 +53,7 @@ const stageApplications = computed(
           {{ title }}
         </h3>
         <UBadge
-          :label="stageApplications.length.toString()"
+          :label="applications.length.toString()"
           color="neutral"
           variant="soft"
           size="md"
@@ -40,18 +61,18 @@ const stageApplications = computed(
       </div>
     </div>
 
-    <!-- Column Body -->
-    <div class="flex-1 p-3 space-y-3 overflow-y-auto">
-      <!-- Job Application Cards -->
+    <!-- Column Body - This is the draggable container -->
+    <div ref="columnRef" class="flex-1 p-3 space-y-3 overflow-y-auto min-h-32">
+      <!-- Job Application Cards - These are the draggable items -->
       <JobApplicationCard
-        v-for="jobApplication in stageApplications"
+        v-for="jobApplication in applications"
         :key="jobApplication.id"
         :job-application="jobApplication"
       />
 
       <!-- Empty state for columns with no jobs -->
       <div
-        v-if="stageApplications.length === 0"
+        v-if="applications.length === 0"
         class="flex flex-col items-center justify-center py-8 text-center"
       >
         <UIcon

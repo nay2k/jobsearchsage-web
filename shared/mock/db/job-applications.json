@@ -8,13 +8,13 @@
     "description": "Looking for an experienced frontend developer to join our team...",
     "salaryRange": "$120,000 - $150,000",
     "applicationDeadline": "2025-09-20T00:00:00.000Z",
-    "stage": "interview",
+    "stage": "final",
     "dateAdded": "2025-09-01T00:00:00.000Z",
     "notes": [
       {
         "id": "n1",
         "content": "Great company culture, strong engineering team",
-        "timestamp": "2025-09-01T00:00:00.000Z",
+        "timestamp": "2024-11-01T00:00:00.000Z",
         "type": "research"
       }
     ],
@@ -27,14 +27,14 @@
         "id": "st1",
         "fromStage": null,
         "toStage": "researched",
-        "timestamp": "2025-09-01T00:00:00.000Z",
+        "timestamp": "2024-11-01T00:00:00.000Z",
         "notes": "Found this position on LinkedIn"
       },
       {
         "id": "st2",
         "fromStage": "researched",
         "toStage": "applied",
-        "timestamp": "2025-09-03T00:00:00.000Z",
+        "timestamp": "2024-11-03T00:00:00.000Z",
         "notes": "Submitted application through company website"
       },
       {
@@ -42,6 +42,13 @@
         "fromStage": "applied",
         "toStage": "interview",
         "timestamp": "2025-09-10T12:43:03.489Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606439950_737iuvq",
+        "fromStage": "interview",
+        "toStage": "final",
+        "timestamp": "2025-09-11T16:00:39.950Z",
         "notes": "Stage updated via API"
       }
     ]
@@ -53,10 +60,27 @@
     "location": "Remote",
     "url": "https://startupxyz.com/jobs/fullstack",
     "salaryRange": "$90,000 - $120,000",
-    "stage": "phone_screen",
+    "stage": "researched",
     "dateAdded": "2025-09-05T00:00:00.000Z",
-    "notes": [],
-    "communications": [],
+    "notes": [
+      {
+        "id": "n2",
+        "content": "Fast-growing startup, equity opportunity",
+        "timestamp": "2024-10-28T00:00:00.000Z",
+        "type": "research"
+      }
+    ],
+    "communications": [
+      {
+        "id": "c1",
+        "type": "email",
+        "direction": "inbound",
+        "subject": "Phone Screen Invitation",
+        "content": "Hi! We would like to schedule a phone screen...",
+        "timestamp": "2024-11-05T00:00:00.000Z",
+        "contactPerson": "Sarah Johnson, HR"
+      }
+    ],
     "tags": ["fullstack", "node", "react"],
     "priority": "medium",
     "source": "Company Website",
@@ -65,19 +89,62 @@
         "id": "st3",
         "fromStage": null,
         "toStage": "researched",
-        "timestamp": "2025-09-05T00:00:00.000Z"
+        "timestamp": "2024-10-28T00:00:00.000Z"
       },
       {
         "id": "st4",
         "fromStage": "researched",
         "toStage": "applied",
-        "timestamp": "2025-09-07T00:00:00.000Z"
+        "timestamp": "2024-10-30T00:00:00.000Z"
       },
       {
         "id": "st5",
         "fromStage": "applied",
         "toStage": "phone_screen",
-        "timestamp": "2025-09-09T00:00:00.000Z"
+        "timestamp": "2024-11-05T00:00:00.000Z",
+        "notes": "HR reached out to schedule phone screen"
+      },
+      {
+        "id": "st_1757604979385_5t3yxi9",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:36:19.385Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757604983395_3rpy8f5",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T15:36:23.395Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757605169233_9djxvcf",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:39:29.233Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606357620_gi30nmf",
+        "fromStage": "applied",
+        "toStage": "researched",
+        "timestamp": "2025-09-11T15:59:17.620Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606365586_6k7kahf",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:59:25.586Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606382037_3x6nwdb",
+        "fromStage": "applied",
+        "toStage": "researched",
+        "timestamp": "2025-09-11T15:59:42.037Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -89,26 +156,62 @@
     "url": "https://dataflow.com/careers/backend-dev",
     "description": "Join our backend team to build scalable microservices...",
     "salaryRange": "$100,000 - $130,000",
-    "stage": "researched",
+    "stage": "interview",
     "dateAdded": "2025-09-08T00:00:00.000Z",
-    "notes": [
-      {
-        "id": "n2",
-        "content": "Interesting tech stack - Go, Kubernetes, PostgreSQL",
-        "timestamp": "2025-09-08T00:00:00.000Z",
-        "type": "research"
-      }
-    ],
+    "notes": [],
     "communications": [],
     "tags": ["backend", "go", "kubernetes", "microservices"],
     "priority": "medium",
     "source": "AngelList",
     "stageHistory": [
       {
-        "id": "st6",
-        "fromStage": null,
+        "id": "st_1757604959187_ua4q052",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:35:59.187Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757604961083_e28gd3s",
+        "fromStage": "applied",
         "toStage": "researched",
-        "timestamp": "2025-09-08T00:00:00.000Z"
+        "timestamp": "2025-09-11T15:36:01.083Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757604969564_otfocyc",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:36:09.564Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757604985200_6in079m",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T15:36:25.200Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757605170937_nmvv3mw",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:39:30.937Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606371187_e370bhz",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T15:59:31.187Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606446709_f0btvda",
+        "fromStage": "phone_screen",
+        "toStage": "interview",
+        "timestamp": "2025-09-11T16:00:46.709Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -128,10 +231,32 @@
     "source": "Indeed",
     "stageHistory": [
       {
-        "id": "st7",
-        "fromStage": null,
+        "id": "st_1757604971970_gmqd2dh",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:36:11.970Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757604986636_kdkstio",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T15:36:26.636Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606369042_zetpdfn",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:59:29.042Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606383012_epjtdgt",
+        "fromStage": "applied",
         "toStage": "researched",
-        "timestamp": "2025-09-06T00:00:00.000Z"
+        "timestamp": "2025-09-11T15:59:43.012Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -142,32 +267,48 @@
     "location": "New York, NY",
     "url": "https://innovatetech.com/careers/pm",
     "salaryRange": "$130,000 - $160,000",
-    "stage": "applied",
+    "stage": "researched",
     "dateAdded": "2025-09-04T00:00:00.000Z",
-    "notes": [
-      {
-        "id": "n3",
-        "content": "Strong product culture, B2B SaaS focus",
-        "timestamp": "2025-09-04T00:00:00.000Z",
-        "type": "research"
-      }
-    ],
+    "notes": [],
     "communications": [],
     "tags": ["product", "saas", "b2b"],
     "priority": "high",
     "source": "Company Website",
     "stageHistory": [
       {
-        "id": "st8",
-        "fromStage": null,
+        "id": "st_1757604963371_vec9c2d",
+        "fromStage": "applied",
         "toStage": "researched",
-        "timestamp": "2025-09-04T00:00:00.000Z"
+        "timestamp": "2025-09-11T15:36:03.371Z",
+        "notes": "Stage updated via API"
       },
       {
-        "id": "st9",
+        "id": "st_1757604976750_16zxt9m",
         "fromStage": "researched",
         "toStage": "applied",
-        "timestamp": "2025-09-06T00:00:00.000Z"
+        "timestamp": "2025-09-11T15:36:16.750Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757604989405_bkzlpjq",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T15:36:29.405Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757605173398_ezus7z8",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:39:33.398Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606384332_j635x0t",
+        "fromStage": "applied",
+        "toStage": "researched",
+        "timestamp": "2025-09-11T15:59:44.332Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -178,7 +319,7 @@
     "location": "Mountain View, CA",
     "url": "https://megacorp.com/jobs/senior-swe",
     "salaryRange": "$150,000 - $200,000",
-    "stage": "applied",
+    "stage": "researched",
     "dateAdded": "2025-10-20T00:00:00.000Z",
     "notes": [],
     "communications": [],
@@ -187,16 +328,25 @@
     "source": "Referral",
     "stageHistory": [
       {
-        "id": "st10",
-        "fromStage": null,
+        "id": "st_1757604965026_vpe09va",
+        "fromStage": "applied",
         "toStage": "researched",
-        "timestamp": "2025-10-20T00:00:00.000Z"
+        "timestamp": "2025-09-11T15:36:05.026Z",
+        "notes": "Stage updated via API"
       },
       {
-        "id": "st11",
+        "id": "st_1757605167560_cnn6y3w",
         "fromStage": "researched",
         "toStage": "applied",
-        "timestamp": "2025-10-22T00:00:00.000Z"
+        "timestamp": "2025-09-11T15:39:27.560Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606385901_abzlh8z",
+        "fromStage": "applied",
+        "toStage": "researched",
+        "timestamp": "2025-09-11T15:59:45.901Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -207,60 +357,27 @@
     "location": "Los Angeles, CA",
     "url": "https://designfirst.com/careers/frontend",
     "salaryRange": "$95,000 - $125,000",
-    "stage": "final",
+    "stage": "phone_screen",
     "dateAdded": "2025-10-15T00:00:00.000Z",
-    "notes": [
-      {
-        "id": "n4",
-        "content": "Final round scheduled for next week",
-        "timestamp": "2025-11-12T00:00:00.000Z",
-        "type": "interview"
-      }
-    ],
-    "communications": [
-      {
-        "id": "c1",
-        "type": "email",
-        "direction": "inbound",
-        "subject": "Final Interview Invitation",
-        "content": "We'd like to invite you for the final round...",
-        "timestamp": "2025-11-12T00:00:00.000Z",
-        "contactPerson": "Sarah Johnson"
-      }
-    ],
+    "notes": [],
+    "communications": [],
     "tags": ["frontend", "vue", "design-systems"],
     "priority": "high",
     "source": "LinkedIn",
     "stageHistory": [
       {
-        "id": "st12",
-        "fromStage": null,
-        "toStage": "researched",
-        "timestamp": "2025-10-15T00:00:00.000Z"
-      },
-      {
-        "id": "st13",
-        "fromStage": "researched",
-        "toStage": "applied",
-        "timestamp": "2025-10-17T00:00:00.000Z"
-      },
-      {
-        "id": "st14",
-        "fromStage": "applied",
-        "toStage": "phone_screen",
-        "timestamp": "2025-10-25T00:00:00.000Z"
-      },
-      {
-        "id": "st15",
-        "fromStage": "phone_screen",
+        "id": "st_1757606435206_6ffrlvu",
+        "fromStage": "final",
         "toStage": "interview",
-        "timestamp": "2025-11-02T00:00:00.000Z"
+        "timestamp": "2025-09-11T16:00:35.206Z",
+        "notes": "Stage updated via API"
       },
       {
-        "id": "st16",
+        "id": "st_1757606598853_5toysxr",
         "fromStage": "interview",
-        "toStage": "final",
-        "timestamp": "2025-11-10T00:00:00.000Z"
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:03:18.853Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -271,66 +388,20 @@
     "location": "Boston, MA",
     "url": "https://aiinnovations.com/jobs/data-scientist",
     "salaryRange": "$120,000 - $150,000",
-    "stage": "offer",
+    "stage": "final",
     "dateAdded": "2025-09-30T00:00:00.000Z",
-    "notes": [
-      {
-        "id": "n5",
-        "content": "Received offer! Need to respond by Friday",
-        "timestamp": "2025-11-13T00:00:00.000Z",
-        "type": "general"
-      }
-    ],
-    "communications": [
-      {
-        "id": "c2",
-        "type": "email",
-        "direction": "inbound",
-        "subject": "Job Offer - Data Scientist Position",
-        "content": "We're excited to extend an offer...",
-        "timestamp": "2025-11-13T00:00:00.000Z",
-        "contactPerson": "Mike Chen"
-      }
-    ],
+    "notes": [],
+    "communications": [],
     "tags": ["data-science", "python", "machine-learning"],
     "priority": "high",
     "source": "Glassdoor",
     "stageHistory": [
       {
-        "id": "st17",
-        "fromStage": null,
-        "toStage": "researched",
-        "timestamp": "2025-09-30T00:00:00.000Z"
-      },
-      {
-        "id": "st18",
-        "fromStage": "researched",
-        "toStage": "applied",
-        "timestamp": "2025-10-02T00:00:00.000Z"
-      },
-      {
-        "id": "st19",
-        "fromStage": "applied",
-        "toStage": "phone_screen",
-        "timestamp": "2025-10-10T00:00:00.000Z"
-      },
-      {
-        "id": "st20",
-        "fromStage": "phone_screen",
-        "toStage": "interview",
-        "timestamp": "2025-10-20T00:00:00.000Z"
-      },
-      {
-        "id": "st21",
-        "fromStage": "interview",
+        "id": "st_1757606436825_2e9a321",
+        "fromStage": "offer",
         "toStage": "final",
-        "timestamp": "2025-11-05T00:00:00.000Z"
-      },
-      {
-        "id": "st22",
-        "fromStage": "final",
-        "toStage": "offer",
-        "timestamp": "2025-11-13T00:00:00.000Z"
+        "timestamp": "2025-09-11T16:00:36.825Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -447,26 +518,104 @@
     "location": "Portland, OR",
     "url": "https://creativestudio.com/careers/ux-designer",
     "salaryRange": "$80,000 - $110,000",
-    "stage": "researched",
+    "stage": "interview",
     "dateAdded": "2025-11-12T00:00:00.000Z",
-    "notes": [
-      {
-        "id": "n8",
-        "content": "Portfolio review required, need to update case studies",
-        "timestamp": "2025-11-12T00:00:00.000Z",
-        "type": "research"
-      }
-    ],
+    "notes": [],
     "communications": [],
     "tags": ["design", "ux", "ui", "figma"],
     "priority": "medium",
     "source": "Dribbble",
     "stageHistory": [
       {
-        "id": "st31",
-        "fromStage": null,
-        "toStage": "researched",
-        "timestamp": "2025-11-12T00:00:00.000Z"
+        "id": "st_1757606353615_b4zxsy5",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T15:59:13.615Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606423504_a30axao",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:00:23.504Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606425442_so7f5q5",
+        "fromStage": "phone_screen",
+        "toStage": "interview",
+        "timestamp": "2025-09-11T16:00:25.442Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606425877_9mpi5ed",
+        "fromStage": "interview",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:00:25.877Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606427967_9wjrxp5",
+        "fromStage": "phone_screen",
+        "toStage": "interview",
+        "timestamp": "2025-09-11T16:00:27.967Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606429952_9ubiz50",
+        "fromStage": "interview",
+        "toStage": "final",
+        "timestamp": "2025-09-11T16:00:29.952Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606430091_jplijui",
+        "fromStage": "final",
+        "toStage": "offer",
+        "timestamp": "2025-09-11T16:00:30.091Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606430233_mf3pmsq",
+        "fromStage": "offer",
+        "toStage": "final",
+        "timestamp": "2025-09-11T16:00:30.233Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606430563_zat0r6b",
+        "fromStage": "final",
+        "toStage": "interview",
+        "timestamp": "2025-09-11T16:00:30.563Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606431036_se7dx6s",
+        "fromStage": "interview",
+        "toStage": "final",
+        "timestamp": "2025-09-11T16:00:31.036Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606431660_noxooip",
+        "fromStage": "final",
+        "toStage": "interview",
+        "timestamp": "2025-09-11T16:00:31.660Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606432333_e56ywn1",
+        "fromStage": "interview",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:00:32.333Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606432895_rjzz8u7",
+        "fromStage": "phone_screen",
+        "toStage": "interview",
+        "timestamp": "2025-09-11T16:00:32.895Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -486,16 +635,18 @@
     "source": "Remote.co",
     "stageHistory": [
       {
-        "id": "st32",
-        "fromStage": null,
+        "id": "st_1757604966990_ol88oe0",
+        "fromStage": "applied",
         "toStage": "researched",
-        "timestamp": "2025-11-05T00:00:00.000Z"
+        "timestamp": "2025-09-11T15:36:06.990Z",
+        "notes": "Stage updated via API"
       },
       {
-        "id": "st33",
+        "id": "st_1757606379560_viecokr",
         "fromStage": "researched",
         "toStage": "applied",
-        "timestamp": "2025-11-07T00:00:00.000Z"
+        "timestamp": "2025-09-11T15:59:39.560Z",
+        "notes": "Stage updated via API"
       }
     ]
   }

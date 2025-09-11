@@ -1,18 +1,27 @@
 <script setup lang="ts">
-import { PIPELINE_STAGES } from '#shared/types/job-tracker';
+import {
+  PIPELINE_STAGES,
+  type JobApplication,
+  type PipelineStage,
+} from '#shared/types/job-tracker';
 import { useJobApplicationStore } from '~/stores/useJobApplicationStore';
 import { storeToRefs } from 'pinia';
+import { useJobApplicationDragAndDrop } from '~/composables/useDragAndDrop';
 import KanbanColumn from './KanbanColumn.vue';
 
 // Initialize store
 const jobApplicationStore = useJobApplicationStore();
 
 // Get reactive state from store
-const { loading, error, searchQuery } = storeToRefs(jobApplicationStore);
+const { loading, error, searchQuery, jobApplicationsByStage } =
+  storeToRefs(jobApplicationStore);
 
 // Get actions from store
 const { fetchJobApplications, setSearchQuery, clearError } =
   jobApplicationStore;
+
+// Get the move function from our composable
+const { moveJobApplication } = useJobApplicationDragAndDrop();
 
 // Static stage titles for display
 const stageDisplayNames = {
@@ -44,6 +53,24 @@ function handleSearchInput(event: Event) {
 // Clear error when user interacts
 function handleClearError() {
   clearError();
+}
+
+// Handle job application moves between stages
+async function handleMoveApplication(
+  application: JobApplication,
+  targetStage: PipelineStage
+) {
+  console.log(
+    `Moving "${application.title}" from ${application.stage} to ${targetStage}`
+  );
+
+  try {
+    await moveJobApplication(application, targetStage);
+    console.log('Successfully moved job application');
+  } catch (error) {
+    console.error('Failed to move job application:', error);
+    // Error is already handled by the store and displayed in the UI
+  }
 }
 </script>
 
@@ -111,6 +138,8 @@ function handleClearError() {
           :key="stage"
           :stage="stage"
           :title="stageDisplayNames[stage]"
+          :applications="jobApplicationsByStage[stage] || []"
+          @move-application="handleMoveApplication"
         />
       </div>
     </div>

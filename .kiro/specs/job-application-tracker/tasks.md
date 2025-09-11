@@ -106,14 +106,14 @@
 
 - [ ] 8. Add drag and drop functionality
 
-  - [ ] 8.1 Create useDragAndDrop composable
+  - [x] 8.1 Create useDragAndDrop composable
 
     - Implement drag state management (draggedJob, dragOverColumn, isDragging)
     - Create drag event handlers (handleDragStart, handleDragOver, handleDrop, handleDragEnd)
     - Include proper error handling for failed drag operations
     - _Requirements: 2.2, 3.2_
 
-  - [ ] 8.2 Add drag interactions to components
+  - [x] 8.2 Add drag interactions to components
     - Make JobApplicationCard draggable with drag event handlers
     - Add drop zones to KanbanColumn components
     - Implement visual feedback during drag operations
