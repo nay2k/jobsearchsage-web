@@ -13,21 +13,9 @@ const emit = defineEmits<{
   moveApplication: [application: JobApplication, targetStage: PipelineStage];
 }>();
 
-// Set up FormKit drag and drop with built-in onTransfer event
+// Set up FormKit drag and drop - simple configuration without onTransfer
 const [columnRef, applications] = useDragAndDrop(props.applications, {
   group: 'kanban', // All columns share the same group for transferability
-  onTransfer: (event: any) => {
-    console.log('Transfer event:', event);
-
-    // When an item is transferred TO this column
-    if (event.targetData && event.targetData.parent === columnRef.value) {
-      const transferredItem = event.data as JobApplication;
-      console.log(`Item transferred to ${props.stage}:`, transferredItem.title);
-
-      // Emit event to parent to handle the API call
-      emit('moveApplication', transferredItem, props.stage);
-    }
-  },
 });
 
 // Watch for changes in props and update the applications array
@@ -37,6 +25,29 @@ watch(
     applications.value = [...newApplications];
   },
   { immediate: true }
+);
+
+// Watch for actual changes in the applications array (when items are moved)
+// This approach only triggers on actual drops, not during hover
+watch(
+  applications,
+  (newApplications, oldApplications) => {
+    // Only handle when an item is added (transferred TO this column)
+    if (newApplications.length > oldApplications.length) {
+      // Find the new item that was added
+      const addedItem = newApplications.find(
+        (app) => !oldApplications.some((oldApp) => oldApp.id === app.id)
+      );
+
+      if (addedItem && addedItem.stage !== props.stage) {
+        console.log(`Item transferred to ${props.stage}:`, addedItem.title);
+
+        // Emit event to parent to handle the API call
+        emit('moveApplication', addedItem, props.stage);
+      }
+    }
+  },
+  { deep: true }
 );
 </script>
 

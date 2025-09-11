@@ -8,7 +8,7 @@
     "description": "Looking for an experienced frontend developer to join our team...",
     "salaryRange": "$120,000 - $150,000",
     "applicationDeadline": "2025-09-20T00:00:00.000Z",
-    "stage": "final",
+    "stage": "interview",
     "dateAdded": "2025-09-01T00:00:00.000Z",
     "notes": [
       {
@@ -19,7 +19,11 @@
       }
     ],
     "communications": [],
-    "tags": ["frontend", "react", "typescript"],
+    "tags": [
+      "frontend",
+      "react",
+      "typescript"
+    ],
     "priority": "high",
     "source": "LinkedIn",
     "stageHistory": [
@@ -50,6 +54,13 @@
         "toStage": "final",
         "timestamp": "2025-09-11T16:00:39.950Z",
         "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608987330_ns7kt5j",
+        "fromStage": "final",
+        "toStage": "interview",
+        "timestamp": "2025-09-11T16:43:07.330Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -60,7 +71,7 @@
     "location": "Remote",
     "url": "https://startupxyz.com/jobs/fullstack",
     "salaryRange": "$90,000 - $120,000",
-    "stage": "researched",
+    "stage": "applied",
     "dateAdded": "2025-09-05T00:00:00.000Z",
     "notes": [
       {
@@ -81,7 +92,11 @@
         "contactPerson": "Sarah Johnson, HR"
       }
     ],
-    "tags": ["fullstack", "node", "react"],
+    "tags": [
+      "fullstack",
+      "node",
+      "react"
+    ],
     "priority": "medium",
     "source": "Company Website",
     "stageHistory": [
@@ -145,6 +160,41 @@
         "toStage": "researched",
         "timestamp": "2025-09-11T15:59:42.037Z",
         "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606671276_5j0g0ti",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:04:31.276Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606977860_y8dw2k4",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:09:37.860Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608962940_06i2n7f",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:42:42.940Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608963812_jyxabb2",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:42:43.812Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608965214_0y3s5ri",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:42:45.214Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -156,11 +206,16 @@
     "url": "https://dataflow.com/careers/backend-dev",
     "description": "Join our backend team to build scalable microservices...",
     "salaryRange": "$100,000 - $130,000",
-    "stage": "interview",
+    "stage": "applied",
     "dateAdded": "2025-09-08T00:00:00.000Z",
     "notes": [],
     "communications": [],
-    "tags": ["backend", "go", "kubernetes", "microservices"],
+    "tags": [
+      "backend",
+      "go",
+      "kubernetes",
+      "microservices"
+    ],
     "priority": "medium",
     "source": "AngelList",
     "stageHistory": [
@@ -212,6 +267,20 @@
         "toStage": "interview",
         "timestamp": "2025-09-11T16:00:46.709Z",
         "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608977400_20iyiph",
+        "fromStage": "interview",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:42:57.400Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757609121536_yk47x5f",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:45:21.536Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -222,11 +291,16 @@
     "location": "Seattle, WA",
     "url": "https://cloudnative.com/jobs/devops",
     "salaryRange": "$110,000 - $140,000",
-    "stage": "researched",
+    "stage": "applied",
     "dateAdded": "2025-09-06T00:00:00.000Z",
     "notes": [],
     "communications": [],
-    "tags": ["devops", "aws", "terraform", "docker"],
+    "tags": [
+      "devops",
+      "aws",
+      "terraform",
+      "docker"
+    ],
     "priority": "low",
     "source": "Indeed",
     "stageHistory": [
@@ -257,6 +331,20 @@
         "toStage": "researched",
         "timestamp": "2025-09-11T15:59:43.012Z",
         "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606672337_bj03zxz",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:04:32.337Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757609078991_kdgpott",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:44:38.991Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -267,11 +355,15 @@
     "location": "New York, NY",
     "url": "https://innovatetech.com/careers/pm",
     "salaryRange": "$130,000 - $160,000",
-    "stage": "researched",
+    "stage": "applied",
     "dateAdded": "2025-09-04T00:00:00.000Z",
     "notes": [],
     "communications": [],
-    "tags": ["product", "saas", "b2b"],
+    "tags": [
+      "product",
+      "saas",
+      "b2b"
+    ],
     "priority": "high",
     "source": "Company Website",
     "stageHistory": [
@@ -309,6 +401,13 @@
         "toStage": "researched",
         "timestamp": "2025-09-11T15:59:44.332Z",
         "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757609470921_b64n8ih",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:51:10.921Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -319,11 +418,15 @@
     "location": "Mountain View, CA",
     "url": "https://megacorp.com/jobs/senior-swe",
     "salaryRange": "$150,000 - $200,000",
-    "stage": "researched",
+    "stage": "applied",
     "dateAdded": "2025-10-20T00:00:00.000Z",
     "notes": [],
     "communications": [],
-    "tags": ["backend", "java", "distributed-systems"],
+    "tags": [
+      "backend",
+      "java",
+      "distributed-systems"
+    ],
     "priority": "high",
     "source": "Referral",
     "stageHistory": [
@@ -347,6 +450,34 @@
         "toStage": "researched",
         "timestamp": "2025-09-11T15:59:45.901Z",
         "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606682587_ditstd5",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:04:42.587Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757609699853_ca1p282",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:54:59.853Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757609700096_ev7p9tw",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:55:00.096Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757609700676_28g1mlz",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:55:00.676Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -357,11 +488,15 @@
     "location": "Los Angeles, CA",
     "url": "https://designfirst.com/careers/frontend",
     "salaryRange": "$95,000 - $125,000",
-    "stage": "phone_screen",
+    "stage": "applied",
     "dateAdded": "2025-10-15T00:00:00.000Z",
     "notes": [],
     "communications": [],
-    "tags": ["frontend", "vue", "design-systems"],
+    "tags": [
+      "frontend",
+      "vue",
+      "design-systems"
+    ],
     "priority": "high",
     "source": "LinkedIn",
     "stageHistory": [
@@ -378,6 +513,20 @@
         "toStage": "phone_screen",
         "timestamp": "2025-09-11T16:03:18.853Z",
         "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606673604_7oesvz4",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:04:33.604Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608944792_17iukt4",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:42:24.792Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -388,11 +537,15 @@
     "location": "Boston, MA",
     "url": "https://aiinnovations.com/jobs/data-scientist",
     "salaryRange": "$120,000 - $150,000",
-    "stage": "final",
+    "stage": "interview",
     "dateAdded": "2025-09-30T00:00:00.000Z",
     "notes": [],
     "communications": [],
-    "tags": ["data-science", "python", "machine-learning"],
+    "tags": [
+      "data-science",
+      "python",
+      "machine-learning"
+    ],
     "priority": "high",
     "source": "Glassdoor",
     "stageHistory": [
@@ -401,6 +554,13 @@
         "fromStage": "offer",
         "toStage": "final",
         "timestamp": "2025-09-11T16:00:36.825Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757609695067_kpnjryf",
+        "fromStage": "final",
+        "toStage": "interview",
+        "timestamp": "2025-09-11T16:54:55.067Z",
         "notes": "Stage updated via API"
       }
     ]
@@ -433,7 +593,12 @@
         "contactPerson": "HR Team"
       }
     ],
-    "tags": ["mobile", "react-native", "ios", "android"],
+    "tags": [
+      "mobile",
+      "react-native",
+      "ios",
+      "android"
+    ],
     "priority": "medium",
     "source": "Stack Overflow Jobs",
     "stageHistory": [
@@ -487,7 +652,11 @@
       }
     ],
     "communications": [],
-    "tags": ["qa", "testing", "automation"],
+    "tags": [
+      "qa",
+      "testing",
+      "automation"
+    ],
     "priority": "low",
     "source": "Company Website",
     "stageHistory": [
@@ -518,11 +687,16 @@
     "location": "Portland, OR",
     "url": "https://creativestudio.com/careers/ux-designer",
     "salaryRange": "$80,000 - $110,000",
-    "stage": "interview",
+    "stage": "researched",
     "dateAdded": "2025-11-12T00:00:00.000Z",
     "notes": [],
     "communications": [],
-    "tags": ["design", "ux", "ui", "figma"],
+    "tags": [
+      "design",
+      "ux",
+      "ui",
+      "figma"
+    ],
     "priority": "medium",
     "source": "Dribbble",
     "stageHistory": [
@@ -616,6 +790,27 @@
         "toStage": "interview",
         "timestamp": "2025-09-11T16:00:32.895Z",
         "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608978331_y0balx3",
+        "fromStage": "interview",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:42:58.331Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608978496_2niu0il",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:42:58.496Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608978737_x5ughhb",
+        "fromStage": "applied",
+        "toStage": "researched",
+        "timestamp": "2025-09-11T16:42:58.737Z",
+        "notes": "Stage updated via API"
       }
     ]
   },
@@ -630,7 +825,11 @@
     "dateAdded": "2025-11-05T00:00:00.000Z",
     "notes": [],
     "communications": [],
-    "tags": ["technical-writing", "documentation", "api-docs"],
+    "tags": [
+      "technical-writing",
+      "documentation",
+      "api-docs"
+    ],
     "priority": "low",
     "source": "Remote.co",
     "stageHistory": [
@@ -646,6 +845,27 @@
         "fromStage": "researched",
         "toStage": "applied",
         "timestamp": "2025-09-11T15:59:39.560Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757606668933_kwlqgxx",
+        "fromStage": "applied",
+        "toStage": "researched",
+        "timestamp": "2025-09-11T16:04:28.933Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608941724_6xtfc6c",
+        "fromStage": "applied",
+        "toStage": "phone_screen",
+        "timestamp": "2025-09-11T16:42:21.724Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757608962168_q7m20ap",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T16:42:42.168Z",
         "notes": "Stage updated via API"
       }
     ]
