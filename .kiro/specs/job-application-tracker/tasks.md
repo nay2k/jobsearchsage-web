@@ -76,14 +76,14 @@
 
 - [ ] 6. Make columns dynamic with real data
 
-  - [ ] 6.1 Connect KanbanBoard to Pinia store
+  - [x] 6.1 Connect KanbanBoard to Pinia store
 
     - Replace hardcoded columns with PIPELINE_STAGES data
     - Add store initialization and data fetching
     - Display loading states while fetching data
     - _Requirements: 2.1, 3.1_
 
-  - [ ] 6.2 Connect KanbanColumn to store data
+  - [x] 6.2 Connect KanbanColumn to store data
     - Make columns display job applications from store by stage
     - Add job count badges to column headers
     - Handle empty states when no jobs in a stage
@@ -91,14 +91,14 @@
 
 - [ ] 7. Make cards dynamic with real data
 
-  - [ ] 7.1 Connect JobApplicationCard to real job data
+  - [x] 7.1 Connect JobApplicationCard to real job data
 
     - Replace hardcoded data with props from JobApplication interface
     - Display real company names, job titles, and application dates
     - Add calculated fields like "days in stage"
     - _Requirements: 2.1, 3.7_
 
-  - [ ] 7.2 Add search functionality
+  - [x] 7.2 Add search functionality
     - Implement search input in KanbanBoard header
     - Connect search to store's setSearchQuery action
     - Filter displayed cards based on search query

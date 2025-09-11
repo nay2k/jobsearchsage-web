@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import type { PipelineStage } from '#shared/types/job-tracker';
+import { useJobApplicationStore } from '~/stores/useJobApplicationStore';
+import { storeToRefs } from 'pinia';
 import JobApplicationCard from './JobApplicationCard.vue';
 
-defineProps<{
+const props = defineProps<{
   stage: PipelineStage;
   title: string;
 }>();
 
-// Static sample job counts for demonstration
-const sampleJobCounts = {
-  researched: 5,
-  applied: 8,
-  phone_screen: 3,
-  interview: 2,
-  final: 1,
-  offer: 1,
-  rejected: 0,
-  withdrawn: 2,
-} as const;
+// Get store data
+const jobApplicationStore = useJobApplicationStore();
+const { jobApplicationsByStage } = storeToRefs(jobApplicationStore);
+
+// Get applications for this specific stage
+const stageApplications = computed(
+  () => jobApplicationsByStage.value[props.stage] || []
+);
 </script>
 
 <template>
@@ -33,7 +32,7 @@ const sampleJobCounts = {
           {{ title }}
         </h3>
         <UBadge
-          :label="sampleJobCounts[stage].toString()"
+          :label="stageApplications.length.toString()"
           color="neutral"
           variant="soft"
           size="md"
@@ -45,13 +44,14 @@ const sampleJobCounts = {
     <div class="flex-1 p-3 space-y-3 overflow-y-auto">
       <!-- Job Application Cards -->
       <JobApplicationCard
-        v-for="i in sampleJobCounts[stage]"
-        :key="`${stage}-${i}`"
+        v-for="jobApplication in stageApplications"
+        :key="jobApplication.id"
+        :job-application="jobApplication"
       />
 
       <!-- Empty state for columns with no jobs -->
       <div
-        v-if="sampleJobCounts[stage] === 0"
+        v-if="stageApplications.length === 0"
         class="flex flex-col items-center justify-center py-8 text-center"
       >
         <UIcon
