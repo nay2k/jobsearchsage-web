@@ -8,11 +8,8 @@ import {
   type Communication,
 } from '#shared/types/job-tracker';
 
-const {
-  isJobApplicationSlideoverOpen,
-  selectedJobApplicationId,
-  closeJobApplicationSlideover,
-} = useJobApplicationTracker();
+const { selectedJobApplicationId, closeJobApplicationSlideover } =
+  useJobApplicationTracker();
 const jobApplicationStore = useJobApplicationStore();
 const toast = useToast();
 
@@ -66,6 +63,7 @@ watch(
 const isFormValid = computed(() => {
   return formData.value.title?.trim() && formData.value.company?.trim();
 });
+
 // Sorted arrays for display (most recent first)
 const sortedStageHistory = computed(() => {
   if (!selectedJobApplication.value?.stageHistory) return [];
@@ -278,18 +276,10 @@ function cancelAddCommunication() {
 </script>
 
 <template>
-  <!-- Non-modal sidebar panel -->
-  <div
-    v-if="isJobApplicationSlideoverOpen"
-    class="fixed top-0 right-0 h-full w-full sm:w-96 lg:w-1/3 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700 z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto"
-    :class="{
-      'translate-x-0': isJobApplicationSlideoverOpen,
-      'translate-x-full': !isJobApplicationSlideoverOpen,
-    }"
-  >
+  <div class="flex flex-col h-full">
     <!-- Header -->
     <div
-      class="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 p-4 z-10"
+      class="flex-shrink-0 px-4 py-4 border-b border-gray-200 dark:border-gray-700"
     >
       <div class="flex items-center justify-between">
         <div class="flex-1 min-w-0">
@@ -312,7 +302,7 @@ function cancelAddCommunication() {
     </div>
 
     <!-- Body -->
-    <div class="p-4">
+    <div class="flex-1 overflow-y-auto px-4 py-4 min-h-0">
       <div v-if="selectedJobApplication" class="space-y-6">
         <!-- Header Actions -->
         <div class="flex items-center justify-between">
@@ -469,6 +459,8 @@ function cancelAddCommunication() {
                   { label: 'Medium', value: 'medium' },
                   { label: 'High', value: 'high' },
                 ]"
+                option-attribute="label"
+                value-attribute="value"
               />
             </div>
 
@@ -485,6 +477,8 @@ function cancelAddCommunication() {
                     value: stage,
                   }))
                 "
+                option-attribute="label"
+                value-attribute="value"
               />
             </div>
           </div>
@@ -575,6 +569,8 @@ function cancelAddCommunication() {
                     { label: 'Research', value: 'research' },
                     { label: 'Follow Up', value: 'follow_up' },
                   ]"
+                  option-attribute="label"
+                  value-attribute="value"
                 />
               </div>
               <div>
@@ -668,6 +664,8 @@ function cancelAddCommunication() {
                       { label: 'Meeting', value: 'meeting' },
                       { label: 'Message', value: 'message' },
                     ]"
+                    option-attribute="label"
+                    value-attribute="value"
                   />
                 </div>
                 <div>
@@ -680,6 +678,8 @@ function cancelAddCommunication() {
                       { label: 'Outbound', value: 'outbound' },
                       { label: 'Inbound', value: 'inbound' },
                     ]"
+                    option-attribute="label"
+                    value-attribute="value"
                   />
                 </div>
               </div>
@@ -800,28 +800,37 @@ function cancelAddCommunication() {
         </div>
       </div>
 
-      <!-- Loading state -->
-      <div v-else class="flex items-center justify-center py-8">
+      <!-- Loading/Debug state -->
+      <div
+        v-else
+        class="flex flex-col items-center justify-center py-8 space-y-4"
+      >
         <UIcon name="i-lucide-loader-2" class="w-6 h-6 animate-spin" />
+        <div class="text-center text-sm text-gray-500 space-y-1">
+          <p>
+            <strong>Selected ID:</strong>
+            {{ selectedJobApplicationId || 'None' }}
+          </p>
+          <p>
+            <strong>Total Applications:</strong>
+            {{ jobApplicationStore.jobApplications.length }}
+          </p>
+          <p><strong>Loading:</strong> {{ jobApplicationStore.loading }}</p>
+          <p>
+            <strong>Error:</strong> {{ jobApplicationStore.error || 'None' }}
+          </p>
+          <div v-if="jobApplicationStore.jobApplications.length > 0">
+            <p><strong>Available IDs:</strong></p>
+            <div class="text-xs">
+              {{
+                jobApplicationStore.jobApplications
+                  .map((app) => app.id)
+                  .join(', ')
+              }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<style>
-/* Ensure dropdown menus appear above the slideover */
-[data-headlessui-state] {
-  z-index: 60 !important;
-}
-
-/* Nuxt UI Select dropdown content */
-.ui-select-content,
-.ui-dropdown-content {
-  z-index: 60 !important;
-}
-
-/* Headless UI Listbox options */
-[role='listbox'] {
-  z-index: 60 !important;
-}
-</style>

@@ -15,6 +15,18 @@ useSeoMeta({
 // Get slideover state for layout adjustment
 const { isJobApplicationSlideoverOpen, closeJobApplicationSlideover } =
   useJobApplicationTracker();
+
+// Initialize the job application store
+const jobApplicationStore = useJobApplicationStore();
+
+// Load data on page mount
+onMounted(async () => {
+  try {
+    await jobApplicationStore.fetchJobApplications();
+  } catch (error) {
+    console.error('Failed to load job applications:', error);
+  }
+});
 </script>
 
 <template>
@@ -39,22 +51,26 @@ const { isJobApplicationSlideoverOpen, closeJobApplicationSlideover } =
     </template>
 
     <template #body>
-      <div class="flex h-full">
-        <!-- Main content area -->
+      <div class="flex h-full overflow-hidden -mx-4 -my-4">
+        <!-- Main content area - Kanban Board -->
         <div
-          class="flex-1 transition-all duration-300 ease-in-out"
+          class="transition-all duration-300 ease-in-out flex-shrink-0"
           :class="{
-            'hidden sm:block sm:mr-96 lg:mr-[33.333333%]':
-              isJobApplicationSlideoverOpen,
-            block: !isJobApplicationSlideoverOpen,
+            'w-full p-4': !isJobApplicationSlideoverOpen,
+            'w-[70%] pl-4 pr-0 py-4': isJobApplicationSlideoverOpen,
           }"
         >
           <!-- Kanban Board -->
           <ApplicationTrackerKanbanBoard />
         </div>
 
-        <!-- Job Application Detail Slideover -->
-        <ApplicationTrackerJobApplicationDetailSlideover />
+        <!-- Job Application Detail Panel -->
+        <div
+          v-if="isJobApplicationSlideoverOpen"
+          class="w-[30%] min-w-[400px] transition-all duration-300 ease-in-out border-l border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex flex-col flex-shrink-0"
+        >
+          <ApplicationTrackerJobApplicationDetailPanel />
+        </div>
       </div>
     </template>
   </UDashboardPanel>

@@ -75,7 +75,7 @@ async function handleMoveApplication(
 </script>
 
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full pr-2">
     <!-- Error Alert -->
     <UAlert
       v-if="error"
@@ -89,7 +89,7 @@ async function handleMoveApplication(
 
     <!-- Board Header -->
     <div
-      class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+      class="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
     >
       <div>
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">

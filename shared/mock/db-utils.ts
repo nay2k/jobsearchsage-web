@@ -162,10 +162,10 @@ export class MockDatabase {
       ...jobApplications[index],
       ...updates,
       dateAdded:
-        updates.dateAdded?.toISOString() || jobApplications[index].dateAdded,
+        updates.dateAdded?.toISOString() || jobApplications[index]?.dateAdded,
       applicationDeadline:
         updates.applicationDeadline?.toISOString() ||
-        jobApplications[index].applicationDeadline,
+        jobApplications[index]?.applicationDeadline,
     };
 
     jobApplications[index] = updatedApp as any;

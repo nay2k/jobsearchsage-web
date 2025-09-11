@@ -220,6 +220,10 @@ const hasRecentActivity = computed(() => {
 const { openJobApplicationSlideover } = useJobApplicationTracker();
 
 function handleCardClick() {
+  console.log(
+    'Card clicked, opening slideover for ID:',
+    props.jobApplication.id
+  );
   openJobApplicationSlideover(props.jobApplication.id);
 }
 </script>

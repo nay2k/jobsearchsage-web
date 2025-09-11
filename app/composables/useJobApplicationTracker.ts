@@ -6,8 +6,13 @@ const _useJobApplicationTracker = () => {
   const selectedJobApplicationId = ref<string | null>(null);
 
   function openJobApplicationSlideover(jobApplicationId: string) {
+    console.log('Opening slideover for job application ID:', jobApplicationId);
     selectedJobApplicationId.value = jobApplicationId;
     isJobApplicationSlideoverOpen.value = true;
+    console.log('Slideover state updated:', {
+      selectedJobApplicationId: selectedJobApplicationId.value,
+      isOpen: isJobApplicationSlideoverOpen.value,
+    });
   }
 
   function closeJobApplicationSlideover() {

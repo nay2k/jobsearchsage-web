@@ -143,7 +143,7 @@
     - Display job application information and stage history
     - _Requirements: 4.1, 4.2, 4.6_
 
-  - [ ] 10.2 Add slideover functionality and integration
+  - [x] 10.2 Add slideover functionality and integration
     - Connect to Pinia store to get job application data by ID
     - Implement save functionality using store's updateJobApplication action
     - Add notes and communication history display with add/edit capabilities
@@ -154,7 +154,7 @@
   - [ ] 11.1 Wire slideover to board interactions
 
     - Connect JobApplicationDetailSlideover to card click events
-    - Add job application creation functionality (floating action button)
+    - Add job application creation functionality (header action button)
     - Implement proper slideover state management
     - _Requirements: 1.2, 4.1_
 

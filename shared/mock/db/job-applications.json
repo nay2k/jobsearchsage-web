@@ -113,7 +113,7 @@
     "location": "Remote",
     "url": "https://startupxyz.com/jobs/fullstack",
     "salaryRange": "$90,000 - $120,000",
-    "stage": "phone_screen",
+    "stage": "applied",
     "dateAdded": "2025-09-05T00:00:00.000Z",
     "notes": [
       {
@@ -121,6 +121,12 @@
         "content": "Fast-growing startup, equity opportunity",
         "timestamp": "2024-10-28T00:00:00.000Z",
         "type": "research"
+      },
+      {
+        "content": "note here",
+        "type": "general",
+        "timestamp": "2025-09-11T20:13:39.939Z",
+        "id": "1531265e-526a-4ade-848f-0ce4e3505284"
       }
     ],
     "communications": [
@@ -243,6 +249,27 @@
         "fromStage": "applied",
         "toStage": "phone_screen",
         "timestamp": "2025-09-11T17:05:26.336Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757621415678_zk82gae",
+        "fromStage": "phone_screen",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T20:10:15.678Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757621416504_octl3le",
+        "fromStage": "applied",
+        "toStage": "researched",
+        "timestamp": "2025-09-11T20:10:16.504Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757621417071_895lfzz",
+        "fromStage": "researched",
+        "toStage": "applied",
+        "timestamp": "2025-09-11T20:10:17.071Z",
         "notes": "Stage updated via API"
       }
     ]
