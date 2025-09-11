@@ -13,8 +13,11 @@ useSeoMeta({
 });
 
 // Get slideover state for layout adjustment
-const { isJobApplicationSlideoverOpen, closeJobApplicationSlideover } =
-  useJobApplicationTracker();
+const {
+  isJobApplicationSlideoverOpen,
+  closeJobApplicationSlideover,
+  openNewJobApplicationSlideover,
+} = useJobApplicationTracker();
 
 // Initialize the job application store
 const jobApplicationStore = useJobApplicationStore();
@@ -27,6 +30,11 @@ onMounted(async () => {
     console.error('Failed to load job applications:', error);
   }
 });
+
+// Handle creating a new job application
+function handleCreateJobApplication() {
+  openNewJobApplicationSlideover();
+}
 </script>
 
 <template>
@@ -44,7 +52,7 @@ onMounted(async () => {
             size="md"
             icon="i-lucide-plus"
             label="Add Job Application"
-            class="cursor-pointer"
+            @click="handleCreateJobApplication"
           />
         </template>
       </UDashboardNavbar>

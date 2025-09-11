@@ -13,41 +13,48 @@ const emit = defineEmits<{
   moveApplication: [application: JobApplication, targetStage: PipelineStage];
 }>();
 
-// Set up FormKit drag and drop - simple configuration without onTransfer
+// Track if we're currently processing a move to prevent interference
+const isProcessingMove = ref(false);
+
+// Set up FormKit drag and drop
 const [columnRef, applications] = useDragAndDrop(props.applications, {
-  group: 'kanban', // All columns share the same group for transferability
-});
+  group: 'kanban',
+  onTransfer: async ({ data }) => {
+    const transferredItem = data.value as JobApplication;
 
-// Watch for changes in props and update the applications array
-watch(
-  () => props.applications,
-  (newApplications) => {
-    applications.value = [...newApplications];
-  },
-  { immediate: true }
-);
+    // Only emit if the item's current stage is different from this column's stage
+    if (transferredItem.stage !== props.stage) {
+      console.log(`Item transferred to ${props.stage}:`, transferredItem.title);
 
-// Watch for actual changes in the applications array (when items are moved)
-// This approach only triggers on actual drops, not during hover
-watch(
-  applications,
-  (newApplications, oldApplications) => {
-    // Only handle when an item is added (transferred TO this column)
-    if (newApplications.length > oldApplications.length) {
-      // Find the new item that was added
-      const addedItem = newApplications.find(
-        (app) => !oldApplications.some((oldApp) => oldApp.id === app.id)
-      );
+      // Set flag to prevent watcher interference
+      isProcessingMove.value = true;
 
-      if (addedItem && addedItem.stage !== props.stage) {
-        console.log(`Item transferred to ${props.stage}:`, addedItem.title);
+      try {
+        emit('moveApplication', transferredItem, props.stage);
 
-        // Emit event to parent to handle the API call
-        emit('moveApplication', addedItem, props.stage);
+        // Wait a bit for the API call to complete
+        await nextTick();
+        setTimeout(() => {
+          isProcessingMove.value = false;
+        }, 500);
+      } catch (error) {
+        isProcessingMove.value = false;
+        throw error;
       }
     }
   },
-  { deep: true }
+});
+
+// Watch for changes in props and update the applications array
+// Only update if we're not currently processing a move
+watch(
+  () => props.applications,
+  (newApplications) => {
+    if (!isProcessingMove.value) {
+      applications.value = [...newApplications];
+    }
+  },
+  { immediate: true }
 );
 </script>
 

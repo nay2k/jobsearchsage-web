@@ -7,10 +7,17 @@
     "type": "research"
   },
   {
-    "id": "n2",
-    "jobApplicationId": "2",
-    "content": "Fast-growing startup, equity opportunity",
-    "timestamp": "2024-10-28T00:00:00.000Z",
-    "type": "research"
+    "id": "n6",
+    "jobApplicationId": "9",
+    "content": "Feedback: Need more React Native experience",
+    "timestamp": "2025-11-01T00:00:00.000Z",
+    "type": "interview"
+  },
+  {
+    "id": "n7",
+    "jobApplicationId": "10",
+    "content": "Decided to focus on development roles instead",
+    "timestamp": "2025-10-20T00:00:00.000Z",
+    "type": "general"
   }
 ]

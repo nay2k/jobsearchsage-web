@@ -157,10 +157,12 @@ export class MockDatabase {
       return null;
     }
 
-    // Update the job application
+    // Update the job application (excluding relational data)
+    const { notes, communications, stageHistory, ...jobAppUpdates } = updates;
+
     const updatedApp = {
       ...jobApplications[index],
-      ...updates,
+      ...jobAppUpdates,
       dateAdded:
         updates.dateAdded?.toISOString() || jobApplications[index]?.dateAdded,
       applicationDeadline:
@@ -191,6 +193,50 @@ export class MockDatabase {
 
       filteredTransitions.push(...(newTransitions as any));
       await this.writeTable('stageTransitions', filteredTransitions);
+    }
+
+    // Handle notes updates
+    if (updates.notes) {
+      const notes = await this.readTable<Note & { jobApplicationId: string }>(
+        'notes'
+      );
+
+      // Remove existing notes for this job
+      const filteredNotes = notes.filter(
+        (note) => note.jobApplicationId !== id
+      );
+
+      // Add new notes
+      const newNotes = updates.notes.map((note) => ({
+        ...note,
+        jobApplicationId: id,
+        timestamp: note.timestamp.toISOString(),
+      }));
+
+      filteredNotes.push(...(newNotes as any));
+      await this.writeTable('notes', filteredNotes);
+    }
+
+    // Handle communications updates
+    if (updates.communications) {
+      const communications = await this.readTable<
+        Communication & { jobApplicationId: string }
+      >('communications');
+
+      // Remove existing communications for this job
+      const filteredCommunications = communications.filter(
+        (comm) => comm.jobApplicationId !== id
+      );
+
+      // Add new communications
+      const newCommunications = updates.communications.map((comm) => ({
+        ...comm,
+        jobApplicationId: id,
+        timestamp: comm.timestamp.toISOString(),
+      }));
+
+      filteredCommunications.push(...(newCommunications as any));
+      await this.writeTable('communications', filteredCommunications);
     }
 
     return this.getJobApplicationById(id);
@@ -258,5 +304,40 @@ export class MockDatabase {
 
     stageTransitions.push(newTransition as any);
     await this.writeTable('stageTransitions', stageTransitions);
+  }
+
+  // Helper method to add a note
+  static async addNote(jobApplicationId: string, note: Note): Promise<void> {
+    const notes = await this.readTable<Note & { jobApplicationId: string }>(
+      'notes'
+    );
+
+    const newNote = {
+      ...note,
+      jobApplicationId,
+      timestamp: note.timestamp.toISOString(),
+    };
+
+    notes.push(newNote as any);
+    await this.writeTable('notes', notes);
+  }
+
+  // Helper method to add a communication
+  static async addCommunication(
+    jobApplicationId: string,
+    communication: Communication
+  ): Promise<void> {
+    const communications = await this.readTable<
+      Communication & { jobApplicationId: string }
+    >('communications');
+
+    const newCommunication = {
+      ...communication,
+      jobApplicationId,
+      timestamp: communication.timestamp.toISOString(),
+    };
+
+    communications.push(newCommunication as any);
+    await this.writeTable('communications', communications);
   }
 }

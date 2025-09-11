@@ -1,12 +1,12 @@
 [
   {
-    "id": "c1",
-    "jobApplicationId": "2",
+    "id": "c3",
+    "jobApplicationId": "9",
     "type": "email",
     "direction": "inbound",
-    "subject": "Phone Screen Invitation",
-    "content": "Hi! We would like to schedule a phone screen...",
-    "timestamp": "2024-11-05T00:00:00.000Z",
-    "contactPerson": "Sarah Johnson, HR"
+    "subject": "Application Update",
+    "content": "Thank you for your interest. Unfortunately...",
+    "timestamp": "2025-11-01T00:00:00.000Z",
+    "contactPerson": "HR Team"
   }
 ]

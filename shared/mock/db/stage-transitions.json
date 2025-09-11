@@ -592,6 +592,38 @@
     "jobApplicationId": "1"
   },
   {
+    "id": "st_1757627666050_2v7kdbc",
+    "fromStage": null,
+    "toStage": "researched",
+    "timestamp": "2025-09-11T21:54:26.050Z",
+    "notes": "Job application created",
+    "jobApplicationId": "job_1757627666050_ad43rxb"
+  },
+  {
+    "id": "st_1757627780621_0hz6hu2",
+    "fromStage": null,
+    "toStage": "researched",
+    "timestamp": "2025-09-11T21:56:20.621Z",
+    "notes": "Job application created",
+    "jobApplicationId": "job_1757627780621_077xfcp"
+  },
+  {
+    "id": "st_1757627801832_5wmpqfm",
+    "fromStage": null,
+    "toStage": "researched",
+    "timestamp": "2025-09-11T21:56:41.832Z",
+    "notes": "Job application created",
+    "jobApplicationId": "job_1757627801832_jat2j1r"
+  },
+  {
+    "id": "st_1757628002485_zp3j1bx",
+    "fromStage": null,
+    "toStage": "researched",
+    "timestamp": "2025-09-11T22:00:02.485Z",
+    "notes": "Job application created",
+    "jobApplicationId": "job_1757628002485_1ivxk96"
+  },
+  {
     "id": "st3",
     "fromStage": null,
     "toStage": "researched",

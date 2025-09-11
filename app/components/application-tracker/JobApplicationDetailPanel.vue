@@ -8,8 +8,11 @@ import {
   type Communication,
 } from '#shared/types/job-tracker';
 
-const { selectedJobApplicationId, closeJobApplicationSlideover } =
-  useJobApplicationTracker();
+const {
+  selectedJobApplicationId,
+  closeJobApplicationSlideover,
+  isCreatingNew,
+} = useJobApplicationTracker();
 const jobApplicationStore = useJobApplicationStore();
 const toast = useToast();
 
@@ -17,6 +20,8 @@ const toast = useToast();
 const formData = ref<Partial<JobApplication>>({});
 const isEditing = ref(false);
 const isSaving = ref(false);
+const isDeleting = ref(false);
+const showDeleteConfirm = ref(false);
 
 // Notes and Communications state
 const isAddingNote = ref(false);
@@ -33,8 +38,30 @@ const newCommunication = ref({
   contactPerson: '',
 });
 
-// Get selected job application
+// Get selected job application or create a draft for new applications
 const selectedJobApplication = computed(() => {
+  if (isCreatingNew.value) {
+    // Return a draft job application for new creation
+    return {
+      id: 'draft',
+      title: '',
+      company: '',
+      location: '',
+      url: '',
+      description: '',
+      salaryRange: '',
+      applicationDeadline: undefined,
+      stage: 'researched' as PipelineStage,
+      dateAdded: new Date(),
+      stageHistory: [],
+      notes: [],
+      communications: [],
+      tags: [],
+      priority: 'medium' as const,
+      source: 'Manual Entry',
+    } as JobApplication;
+  }
+
   if (!selectedJobApplicationId.value) return null;
   return jobApplicationStore.jobApplications.find(
     (app) => app.id === selectedJobApplicationId.value
@@ -53,7 +80,12 @@ watch(
         communications: [...newApp.communications],
         tags: [...newApp.tags],
       };
-      isEditing.value = false;
+
+      // Auto-enter edit mode for new job applications
+      isEditing.value =
+        isCreatingNew.value ||
+        (newApp.title === 'New Job Application' &&
+          newApp.company === 'Company Name');
     }
   },
   { immediate: true }
@@ -87,25 +119,65 @@ const sortedCommunications = computed(() => {
 });
 
 async function handleSave() {
-  if (!selectedJobApplicationId.value || !isFormValid.value) return;
+  if (!isFormValid.value) return;
 
   isSaving.value = true;
   try {
-    await jobApplicationStore.updateJobApplication(
-      selectedJobApplicationId.value,
-      formData.value
-    );
-    isEditing.value = false;
-    toast.add({
-      title: 'Success',
-      description: 'Job application updated successfully',
-      color: 'success',
-    });
+    if (isCreatingNew.value) {
+      // Create new job application
+      const newJobApplication = await jobApplicationStore.createJobApplication({
+        title: formData.value.title!,
+        company: formData.value.company!,
+        location: formData.value.location,
+        url: formData.value.url,
+        description: formData.value.description,
+        salaryRange: formData.value.salaryRange,
+        applicationDeadline: formData.value.applicationDeadline,
+        tags: formData.value.tags || [],
+        priority: formData.value.priority || 'medium',
+        source: formData.value.source || 'Manual Entry',
+      });
+
+      // If there are notes or communications in the draft, update the job application
+      if (
+        (formData.value.notes && formData.value.notes.length > 0) ||
+        (formData.value.communications &&
+          formData.value.communications.length > 0)
+      ) {
+        await jobApplicationStore.updateJobApplication(newJobApplication.id, {
+          notes: formData.value.notes || [],
+          communications: formData.value.communications || [],
+        });
+      }
+
+      toast.add({
+        title: 'Success',
+        description: 'Job application created successfully',
+        color: 'success',
+      });
+
+      // Close the slideover after successful creation
+      closeJobApplicationSlideover();
+    } else if (selectedJobApplicationId.value) {
+      // Update existing job application
+      await jobApplicationStore.updateJobApplication(
+        selectedJobApplicationId.value,
+        formData.value
+      );
+      isEditing.value = false;
+      toast.add({
+        title: 'Success',
+        description: 'Job application updated successfully',
+        color: 'success',
+      });
+    }
   } catch (error) {
     console.error('Failed to save job application:', error);
     toast.add({
       title: 'Error',
-      description: 'Failed to save job application',
+      description: isCreatingNew.value
+        ? 'Failed to create job application'
+        : 'Failed to update job application',
       color: 'error',
     });
   } finally {
@@ -113,8 +185,56 @@ async function handleSave() {
   }
 }
 
+function handleDeleteClick() {
+  if (!showDeleteConfirm.value) {
+    // First click - show confirmation
+    showDeleteConfirm.value = true;
+    // Auto-hide confirmation after 3 seconds
+    setTimeout(() => {
+      showDeleteConfirm.value = false;
+    }, 3000);
+  } else {
+    // Second click - actually delete
+    handleDelete();
+  }
+}
+
+async function handleDelete() {
+  if (!selectedJobApplicationId.value || isCreatingNew.value) return;
+
+  isDeleting.value = true;
+  try {
+    await jobApplicationStore.deleteJobApplication(
+      selectedJobApplicationId.value
+    );
+
+    toast.add({
+      title: 'Success',
+      description: 'Job application deleted successfully',
+      color: 'success',
+    });
+
+    // Close the panel after successful deletion
+    closeJobApplicationSlideover();
+  } catch (error) {
+    console.error('Failed to delete job application:', error);
+    toast.add({
+      title: 'Error',
+      description: 'Failed to delete job application',
+      color: 'error',
+    });
+  } finally {
+    isDeleting.value = false;
+    showDeleteConfirm.value = false;
+  }
+}
+
 function handleCancel() {
-  if (selectedJobApplication.value) {
+  if (isCreatingNew.value) {
+    // Close the slideover when canceling new job application creation
+    closeJobApplicationSlideover();
+  } else if (selectedJobApplication.value) {
+    // Reset form data for existing job applications
     formData.value = {
       ...selectedJobApplication.value,
       stageHistory: [...selectedJobApplication.value.stageHistory],
@@ -122,8 +242,8 @@ function handleCancel() {
       communications: [...selectedJobApplication.value.communications],
       tags: [...selectedJobApplication.value.tags],
     };
+    isEditing.value = false;
   }
-  isEditing.value = false;
 }
 
 function formatDate(date: Date | string) {
@@ -155,9 +275,8 @@ function getPriorityColor(priority: 'low' | 'medium' | 'high') {
 
 // Notes functionality
 async function handleAddNote() {
-  if (!selectedJobApplicationId.value || !newNote.value.content.trim()) return;
-
-  try {
+  if (isCreatingNew.value) {
+    // For new job applications, just add to the form data
     const noteData = {
       content: newNote.value.content.trim(),
       type: newNote.value.type,
@@ -165,17 +284,40 @@ async function handleAddNote() {
       id: crypto.randomUUID(),
     };
 
-    // Update the job application with the new note
-    const currentApp = selectedJobApplication.value;
-    if (currentApp) {
-      const updatedNotes = [...currentApp.notes, noteData];
-      await jobApplicationStore.updateJobApplication(
-        selectedJobApplicationId.value,
-        {
-          notes: updatedNotes,
-        }
-      );
-    }
+    formData.value.notes = [...(formData.value.notes || []), noteData];
+
+    // Reset form
+    newNote.value = {
+      content: '',
+      type: 'general',
+    };
+    isAddingNote.value = false;
+
+    toast.add({
+      title: 'Success',
+      description: 'Note added to draft',
+      color: 'success',
+    });
+    return;
+  }
+
+  if (!selectedJobApplicationId.value || !newNote.value.content.trim()) return;
+
+  try {
+    // Add note via API
+    await $fetch(
+      `/api/job-applications/${selectedJobApplicationId.value}/notes`,
+      {
+        method: 'POST',
+        body: {
+          content: newNote.value.content.trim(),
+          type: newNote.value.type,
+        },
+      }
+    );
+
+    // Refresh the job application data to get the updated notes
+    await jobApplicationStore.fetchJobApplications();
 
     // Reset form
     newNote.value = {
@@ -209,6 +351,41 @@ function cancelAddNote() {
 
 // Communications functionality
 async function handleAddCommunication() {
+  if (isCreatingNew.value) {
+    // For new job applications, just add to the form data
+    const communicationData = {
+      id: crypto.randomUUID(),
+      type: newCommunication.value.type,
+      direction: newCommunication.value.direction,
+      subject: newCommunication.value.subject.trim() || undefined,
+      content: newCommunication.value.content.trim(),
+      contactPerson: newCommunication.value.contactPerson.trim() || undefined,
+      timestamp: new Date(),
+    };
+
+    formData.value.communications = [
+      ...(formData.value.communications || []),
+      communicationData,
+    ];
+
+    // Reset form
+    newCommunication.value = {
+      type: 'email',
+      direction: 'outbound',
+      subject: '',
+      content: '',
+      contactPerson: '',
+    };
+    isAddingCommunication.value = false;
+
+    toast.add({
+      title: 'Success',
+      description: 'Communication added to draft',
+      color: 'success',
+    });
+    return;
+  }
+
   if (!selectedJobApplicationId.value || !newCommunication.value.content.trim())
     return;
 
@@ -223,20 +400,24 @@ async function handleAddCommunication() {
       timestamp: new Date(),
     };
 
-    // Update the job application with the new communication
-    const currentApp = selectedJobApplication.value;
-    if (currentApp) {
-      const updatedCommunications = [
-        ...currentApp.communications,
-        communicationData,
-      ];
-      await jobApplicationStore.updateJobApplication(
-        selectedJobApplicationId.value,
-        {
-          communications: updatedCommunications,
-        }
-      );
-    }
+    // Add communication via API
+    await $fetch(
+      `/api/job-applications/${selectedJobApplicationId.value}/communications`,
+      {
+        method: 'POST',
+        body: {
+          type: newCommunication.value.type,
+          direction: newCommunication.value.direction,
+          subject: newCommunication.value.subject.trim() || undefined,
+          content: newCommunication.value.content.trim(),
+          contactPerson:
+            newCommunication.value.contactPerson.trim() || undefined,
+        },
+      }
+    );
+
+    // Refresh the job application data to get the updated communications
+    await jobApplicationStore.fetchJobApplications();
 
     // Reset form
     newCommunication.value = {
@@ -286,10 +467,18 @@ function cancelAddCommunication() {
           <h2
             class="text-lg font-semibold text-gray-900 dark:text-white truncate"
           >
-            {{ selectedJobApplication?.title || 'Job Application' }}
+            {{
+              isCreatingNew
+                ? 'New Job Application'
+                : selectedJobApplication?.title || 'Job Application'
+            }}
           </h2>
           <p class="text-sm text-gray-500 dark:text-gray-400 truncate">
-            {{ selectedJobApplication?.company }}
+            {{
+              isCreatingNew
+                ? 'Enter company details below'
+                : selectedJobApplication?.company
+            }}
           </p>
         </div>
         <UButton
@@ -320,15 +509,31 @@ function cancelAddCommunication() {
           </div>
 
           <div class="flex items-center gap-2">
-            <UButton
-              v-if="!isEditing"
-              icon="i-lucide-edit"
-              size="sm"
-              variant="ghost"
-              @click="isEditing = true"
-            >
-              Edit
-            </UButton>
+            <template v-if="!isEditing">
+              <UButton
+                icon="i-lucide-edit"
+                size="sm"
+                variant="ghost"
+                @click="isEditing = true"
+              >
+                Edit
+              </UButton>
+              <UButton
+                v-if="!isCreatingNew"
+                :icon="
+                  showDeleteConfirm
+                    ? 'i-lucide-alert-triangle'
+                    : 'i-lucide-trash'
+                "
+                size="sm"
+                variant="ghost"
+                :color="'error'"
+                :loading="isDeleting"
+                @click="handleDeleteClick"
+              >
+                {{ showDeleteConfirm ? 'Sure?' : 'Delete' }}
+              </UButton>
+            </template>
             <template v-else>
               <UButton size="sm" variant="ghost" @click="handleCancel">
                 Cancel
@@ -339,7 +544,7 @@ function cancelAddCommunication() {
                 :disabled="!isFormValid"
                 @click="handleSave"
               >
-                Save
+                {{ isCreatingNew ? 'Create' : 'Save' }}
               </UButton>
             </template>
           </div>
@@ -507,7 +712,7 @@ function cancelAddCommunication() {
         </div>
 
         <!-- Stage History -->
-        <div>
+        <div v-if="!isCreatingNew">
           <h3 class="text-lg font-medium mb-3">Stage History</h3>
           <div class="space-y-2">
             <div
@@ -540,7 +745,7 @@ function cancelAddCommunication() {
         </div>
 
         <!-- Notes Section -->
-        <div>
+        <div v-if="!isCreatingNew">
           <div class="flex items-center justify-between mb-3">
             <h3 class="text-lg font-medium">Notes</h3>
             <UButton
@@ -631,7 +836,7 @@ function cancelAddCommunication() {
         </div>
 
         <!-- Communications Section -->
-        <div>
+        <div v-if="!isCreatingNew">
           <div class="flex items-center justify-between mb-3">
             <h3 class="text-lg font-medium">Communications</h3>
             <UButton
@@ -771,7 +976,7 @@ function cancelAddCommunication() {
         </div>
 
         <!-- Tags -->
-        <div v-if="selectedJobApplication.tags.length > 0">
+        <div v-if="!isCreatingNew && selectedJobApplication.tags.length > 0">
           <h3 class="text-lg font-medium mb-3">Tags</h3>
           <div class="flex flex-wrap gap-2">
             <UBadge
@@ -786,7 +991,7 @@ function cancelAddCommunication() {
         </div>
 
         <!-- Metadata -->
-        <div class="pt-4 border-t border-gray-200">
+        <div v-if="!isCreatingNew" class="pt-4 border-t border-gray-200">
           <div class="grid grid-cols-2 gap-4 text-sm text-gray-600">
             <div>
               <span class="font-medium">Added:</span>

@@ -56,7 +56,11 @@ watch(
         communications: [...newApp.communications],
         tags: [...newApp.tags],
       };
-      isEditing.value = false;
+
+      // Auto-enter edit mode for new job applications (those with default titles)
+      isEditing.value =
+        newApp.title === 'New Job Application' &&
+        newApp.company === 'Company Name';
     }
   },
   { immediate: true }
@@ -115,6 +119,36 @@ async function handleSave() {
   }
 }
 
+async function handleDelete() {
+  if (!selectedJobApplicationId.value) return;
+
+  isDeleting.value = true;
+  try {
+    await jobApplicationStore.deleteJobApplication(
+      selectedJobApplicationId.value
+    );
+
+    toast.add({
+      title: 'Success',
+      description: 'Job application deleted successfully',
+      color: 'success',
+    });
+
+    // Close the slideover after successful deletion
+    closeJobApplicationSlideover();
+  } catch (error) {
+    console.error('Failed to delete job application:', error);
+    toast.add({
+      title: 'Error',
+      description: 'Failed to delete job application',
+      color: 'error',
+    });
+  } finally {
+    isDeleting.value = false;
+    showDeleteModal.value = false;
+  }
+}
+
 function handleCancel() {
   if (selectedJobApplication.value) {
     formData.value = {
@@ -157,27 +191,24 @@ function getPriorityColor(priority: 'low' | 'medium' | 'high') {
 
 // Notes functionality
 async function handleAddNote() {
+  // For the slideover, we should always have a selectedJobApplicationId for existing jobs
   if (!selectedJobApplicationId.value || !newNote.value.content.trim()) return;
 
   try {
-    const noteData = {
-      content: newNote.value.content.trim(),
-      type: newNote.value.type,
-      timestamp: new Date(),
-      id: crypto.randomUUID(),
-    };
+    // Add note via API
+    await $fetch(
+      `/api/job-applications/${selectedJobApplicationId.value}/notes`,
+      {
+        method: 'POST',
+        body: {
+          content: newNote.value.content.trim(),
+          type: newNote.value.type,
+        },
+      }
+    );
 
-    // Update the job application with the new note
-    const currentApp = selectedJobApplication.value;
-    if (currentApp) {
-      const updatedNotes = [...currentApp.notes, noteData];
-      await jobApplicationStore.updateJobApplication(
-        selectedJobApplicationId.value,
-        {
-          notes: updatedNotes,
-        }
-      );
-    }
+    // Refresh the job application data to get the updated notes
+    await jobApplicationStore.fetchJobApplications();
 
     // Reset form
     newNote.value = {
@@ -215,30 +246,24 @@ async function handleAddCommunication() {
     return;
 
   try {
-    const communicationData = {
-      id: crypto.randomUUID(),
-      type: newCommunication.value.type,
-      direction: newCommunication.value.direction,
-      subject: newCommunication.value.subject.trim() || undefined,
-      content: newCommunication.value.content.trim(),
-      contactPerson: newCommunication.value.contactPerson.trim() || undefined,
-      timestamp: new Date(),
-    };
+    // Add communication via API
+    await $fetch(
+      `/api/job-applications/${selectedJobApplicationId.value}/communications`,
+      {
+        method: 'POST',
+        body: {
+          type: newCommunication.value.type,
+          direction: newCommunication.value.direction,
+          subject: newCommunication.value.subject.trim() || undefined,
+          content: newCommunication.value.content.trim(),
+          contactPerson:
+            newCommunication.value.contactPerson.trim() || undefined,
+        },
+      }
+    );
 
-    // Update the job application with the new communication
-    const currentApp = selectedJobApplication.value;
-    if (currentApp) {
-      const updatedCommunications = [
-        ...currentApp.communications,
-        communicationData,
-      ];
-      await jobApplicationStore.updateJobApplication(
-        selectedJobApplicationId.value,
-        {
-          communications: updatedCommunications,
-        }
-      );
-    }
+    // Refresh the job application data to get the updated communications
+    await jobApplicationStore.fetchJobApplications();
 
     // Reset form
     newCommunication.value = {
