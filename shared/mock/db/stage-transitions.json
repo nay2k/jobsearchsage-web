@@ -700,5 +700,13 @@
     "timestamp": "2025-09-11T17:05:29.166Z",
     "notes": "Stage updated via API",
     "jobApplicationId": "1"
+  },
+  {
+    "id": "st_1757621175688_b1ht1pw",
+    "fromStage": "phone_screen",
+    "toStage": "interview",
+    "timestamp": "2025-09-11T20:06:15.688Z",
+    "notes": "Stage updated via API",
+    "jobApplicationId": "1"
   }
 ]

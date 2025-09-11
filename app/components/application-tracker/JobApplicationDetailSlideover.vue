@@ -102,7 +102,7 @@ function getPriorityColor(priority: 'low' | 'medium' | 'high') {
   <!-- Non-modal sidebar panel -->
   <div
     v-if="isJobApplicationSlideoverOpen"
-    class="fixed top-0 right-0 h-full w-1/3 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700 z-40 transform transition-transform duration-300 ease-in-out overflow-y-auto"
+    class="fixed top-0 right-0 h-full w-full sm:w-96 lg:w-1/3 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700 z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto"
     :class="{
       'translate-x-0': isJobApplicationSlideoverOpen,
       'translate-x-full': !isJobApplicationSlideoverOpen,
@@ -391,7 +391,9 @@ function getPriorityColor(priority: 'low' | 'medium' | 'high') {
                   {{ formatTimeAgo(new Date(note.timestamp)) }}
                 </time>
               </div>
-              <p class="text-sm whitespace-pre-wrap">{{ note.content }}</p>
+              <p class="text-sm whitespace-pre-wrap">
+                {{ note.content }}
+              </p>
             </div>
           </div>
           <p v-else class="text-sm text-gray-500">No notes yet</p>
@@ -429,7 +431,9 @@ function getPriorityColor(priority: 'low' | 'medium' | 'high') {
               <p v-if="comm.subject" class="text-sm font-medium mb-1">
                 {{ comm.subject }}
               </p>
-              <p class="text-sm whitespace-pre-wrap">{{ comm.content }}</p>
+              <p class="text-sm whitespace-pre-wrap">
+                {{ comm.content }}
+              </p>
             </div>
           </div>
           <p v-else class="text-sm text-gray-500">No communications yet</p>

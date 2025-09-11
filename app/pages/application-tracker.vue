@@ -44,8 +44,9 @@ const { isJobApplicationSlideoverOpen, closeJobApplicationSlideover } =
         <div
           class="flex-1 transition-all duration-300 ease-in-out"
           :class="{
-            'mr-[30%]': isJobApplicationSlideoverOpen,
-            'mr-0': !isJobApplicationSlideoverOpen,
+            'hidden sm:block sm:mr-96 lg:mr-[33.333333%]':
+              isJobApplicationSlideoverOpen,
+            block: !isJobApplicationSlideoverOpen,
           }"
         >
           <!-- Kanban Board -->

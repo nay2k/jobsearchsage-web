@@ -8,7 +8,7 @@
     "description": "Looking for an experienced frontend developer to join our team...",
     "salaryRange": "$120,000 - $150,000",
     "applicationDeadline": "2025-09-20T00:00:00.000Z",
-    "stage": "phone_screen",
+    "stage": "interview",
     "dateAdded": "2025-09-01T00:00:00.000Z",
     "notes": [
       {
@@ -95,6 +95,13 @@
         "fromStage": "applied",
         "toStage": "phone_screen",
         "timestamp": "2025-09-11T17:05:29.166Z",
+        "notes": "Stage updated via API"
+      },
+      {
+        "id": "st_1757621175688_b1ht1pw",
+        "fromStage": "phone_screen",
+        "toStage": "interview",
+        "timestamp": "2025-09-11T20:06:15.688Z",
         "notes": "Stage updated via API"
       }
     ]
