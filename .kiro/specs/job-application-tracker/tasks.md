@@ -61,14 +61,14 @@
     - Add basic responsive grid layout
     - _Requirements: 3.1, 3.5_
 
-  - [ ] 5.2 Create static JobApplicationCard component
+  - [x] 5.2 Create static JobApplicationCard component
 
     - Build basic card structure with hardcoded sample data
     - Display company name, job title, and basic info
     - Add basic card styling using Nuxt UI
     - _Requirements: 2.1, 3.7_
 
-  - [ ] 5.3 Create static KanbanColumn component
+  - [x] 5.3 Create static KanbanColumn component
     - Build column container with header and card area
     - Add static sample cards to each column
     - Implement basic column styling and spacing

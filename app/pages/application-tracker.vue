@@ -25,9 +25,10 @@ useSeoMeta({
           <UButton
             color="primary"
             variant="solid"
-            size="sm"
+            size="md"
             icon="i-lucide-plus"
             label="Add Job Application"
+            class="cursor-pointer"
           />
         </template>
       </UDashboardNavbar>
