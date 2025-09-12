@@ -1,12 +1,12 @@
 [
   {
     "id": "c3",
-    "jobApplicationId": "9",
     "type": "email",
     "direction": "inbound",
     "subject": "Application Update",
     "content": "Thank you for your interest. Unfortunately...",
-    "timestamp": "2025-11-01T00:00:00.000Z",
-    "contactPerson": "HR Team"
+    "timestamp": "2025-08-01T00:00:00.000Z",
+    "contactPerson": "HR Team",
+    "jobApplicationId": "9"
   }
 ]

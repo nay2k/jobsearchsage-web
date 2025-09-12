@@ -404,14 +404,15 @@ function handleClose() {
 </script>
 
 <template>
-  <div class="flex flex-col h-full bg-white">
+  <div class="flex flex-col h-full bg-white dark:bg-gray-900">
     <!-- Header -->
-    <div class="p-2 border-b border-gray-200">
+    <div class="p-2 border-b border-gray-200 dark:border-gray-700">
       <div class="flex justify-end">
         <div class="flex gap-2">
           <!-- Edit/Delete buttons in header -->
           <template v-if="!isEditing">
             <UButton
+              class="cursor-pointer"
               icon="i-lucide-edit"
               size="sm"
               variant="ghost"
@@ -422,6 +423,7 @@ function handleClose() {
             </UButton>
             <UButton
               v-if="!isCreatingNew"
+              class="cursor-pointer"
               :icon="
                 showDeleteConfirm ? 'i-lucide-alert-triangle' : 'i-lucide-trash'
               "
@@ -436,6 +438,7 @@ function handleClose() {
           </template>
           <template v-else>
             <UButton
+              class="cursor-pointer"
               size="sm"
               variant="ghost"
               color="gray"
@@ -446,6 +449,7 @@ function handleClose() {
               {{ isCreatingNew ? 'Create' : 'Save' }}
             </UButton>
             <UButton
+              class="cursor-pointer"
               size="sm"
               variant="ghost"
               color="gray"
@@ -455,12 +459,7 @@ function handleClose() {
             </UButton>
           </template>
           <UButton
-            icon="i-lucide-star"
-            size="sm"
-            variant="ghost"
-            color="gray"
-          />
-          <UButton
+            class="cursor-pointer"
             icon="i-lucide-x"
             size="sm"
             variant="ghost"
@@ -476,14 +475,14 @@ function handleClose() {
       <div v-if="selectedJobApplication" class="px-6 py-6">
         <!-- Job Title -->
         <div class="mb-6">
-          <h1 class="text-2xl font-semibold text-gray-900 mb-2">
+          <h1 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
             {{
               isCreatingNew
                 ? 'New Job Application'
                 : selectedJobApplication?.title || 'Job Application'
             }}
           </h1>
-          <p class="text-gray-600">
+          <p class="text-gray-600 dark:text-gray-300">
             {{
               isCreatingNew
                 ? 'Enter company details below'
@@ -496,7 +495,11 @@ function handleClose() {
         <div class="grid grid-cols-1 gap-6 mb-8">
           <!-- Job Title -->
           <div class="flex items-center">
-            <div class="w-20 text-sm font-medium text-gray-500">Title</div>
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              Title
+            </div>
             <div class="flex-1">
               <UInput
                 v-if="isEditing"
@@ -504,7 +507,7 @@ function handleClose() {
                 placeholder="Enter job title"
                 class="max-w-md"
               />
-              <div v-else class="text-gray-900">
+              <div v-else class="text-gray-900 dark:text-white">
                 {{ selectedJobApplication.title }}
               </div>
             </div>
@@ -512,7 +515,11 @@ function handleClose() {
 
           <!-- Status -->
           <div class="flex items-center">
-            <div class="w-20 text-sm font-medium text-gray-500">Status</div>
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              Status
+            </div>
             <div class="flex-1">
               <div v-if="isEditing">
                 <USelect
@@ -539,7 +546,11 @@ function handleClose() {
 
           <!-- Company -->
           <div class="flex items-center">
-            <div class="w-20 text-sm font-medium text-gray-500">Company</div>
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              Company
+            </div>
             <div class="flex-1">
               <UInput
                 v-if="isEditing"
@@ -547,7 +558,7 @@ function handleClose() {
                 placeholder="Enter company name"
                 class="max-w-md"
               />
-              <div v-else class="text-gray-900">
+              <div v-else class="text-gray-900 dark:text-white">
                 {{ selectedJobApplication.company }}
               </div>
             </div>
@@ -555,7 +566,11 @@ function handleClose() {
 
           <!-- Location -->
           <div class="flex items-center">
-            <div class="w-20 text-sm font-medium text-gray-500">Location</div>
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              Location
+            </div>
             <div class="flex-1">
               <UInput
                 v-if="isEditing"
@@ -563,7 +578,7 @@ function handleClose() {
                 placeholder="Enter location"
                 class="max-w-md"
               />
-              <div v-else class="text-gray-900">
+              <div v-else class="text-gray-900 dark:text-white">
                 {{ selectedJobApplication.location || 'Not specified' }}
               </div>
             </div>
@@ -571,7 +586,11 @@ function handleClose() {
 
           <!-- Salary -->
           <div class="flex items-center">
-            <div class="w-20 text-sm font-medium text-gray-500">Salary</div>
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              Salary
+            </div>
             <div class="flex-1">
               <UInput
                 v-if="isEditing"
@@ -579,7 +598,7 @@ function handleClose() {
                 placeholder="e.g., $80,000 - $100,000"
                 class="max-w-md"
               />
-              <div v-else class="text-gray-900">
+              <div v-else class="text-gray-900 dark:text-white">
                 {{ selectedJobApplication.salaryRange || 'Not specified' }}
               </div>
             </div>
@@ -587,7 +606,11 @@ function handleClose() {
 
           <!-- Due Date -->
           <div class="flex items-center">
-            <div class="w-20 text-sm font-medium text-gray-500">Due date</div>
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              Due date
+            </div>
             <div class="flex-1">
               <UInput
                 v-if="isEditing"
@@ -595,7 +618,7 @@ function handleClose() {
                 type="date"
                 class="max-w-md"
               />
-              <div v-else class="text-gray-900">
+              <div v-else class="text-gray-900 dark:text-white">
                 {{
                   selectedJobApplication.applicationDeadline
                     ? formatDate(selectedJobApplication.applicationDeadline)
@@ -607,7 +630,11 @@ function handleClose() {
 
           <!-- Priority -->
           <div class="flex items-center">
-            <div class="w-20 text-sm font-medium text-gray-500">Priority</div>
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              Priority
+            </div>
             <div class="flex-1">
               <div v-if="isEditing">
                 <USelect
@@ -634,7 +661,11 @@ function handleClose() {
 
           <!-- Source -->
           <div class="flex items-center">
-            <div class="w-20 text-sm font-medium text-gray-500">Source</div>
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              Source
+            </div>
             <div class="flex-1">
               <UInput
                 v-if="isEditing"
@@ -642,7 +673,7 @@ function handleClose() {
                 placeholder="e.g., LinkedIn, Company Website"
                 class="max-w-md"
               />
-              <div v-else class="text-gray-900">
+              <div v-else class="text-gray-900 dark:text-white">
                 {{ selectedJobApplication.source || 'Not specified' }}
               </div>
             </div>
@@ -650,7 +681,11 @@ function handleClose() {
 
           <!-- URL -->
           <div class="flex items-center">
-            <div class="w-20 text-sm font-medium text-gray-500">URL</div>
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              URL
+            </div>
             <div class="flex-1">
               <UInput
                 v-if="isEditing"
@@ -663,7 +698,7 @@ function handleClose() {
                   v-if="selectedJobApplication.url"
                   :to="selectedJobApplication.url"
                   target="_blank"
-                  class="text-blue-600 hover:text-blue-800 text-sm"
+                  class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
                 >
                   View Original Posting
                   <UIcon
@@ -671,7 +706,7 @@ function handleClose() {
                     class="w-3 h-3 ml-1 inline"
                   />
                 </ULink>
-                <span v-else class="text-gray-500 text-sm"
+                <span v-else class="text-gray-500 dark:text-gray-400 text-sm"
                   >No URL provided</span
                 >
               </div>
@@ -680,7 +715,9 @@ function handleClose() {
 
           <!-- Description -->
           <div class="flex">
-            <div class="w-20 text-sm font-medium text-gray-500 pt-2">
+            <div
+              class="w-20 text-sm font-medium text-gray-500 dark:text-gray-400 pt-2"
+            >
               Description
             </div>
             <div class="flex-1">
@@ -691,14 +728,14 @@ function handleClose() {
                 :rows="4"
                 class="max-w-2xl"
               />
-              <div v-else class="text-gray-900 text-sm">
+              <div v-else class="text-gray-900 dark:text-white text-sm">
                 <p
                   v-if="selectedJobApplication.description"
                   class="whitespace-pre-wrap"
                 >
                   {{ selectedJobApplication.description }}
                 </p>
-                <span v-else class="text-gray-500"
+                <span v-else class="text-gray-500 dark:text-gray-400"
                   >No description provided</span
                 >
               </div>
@@ -749,11 +786,14 @@ function handleClose() {
             <template #notes>
               <div class="p-4">
                 <!-- Add Note Form -->
-                <div v-if="isAddingNote" class="mb-6 p-4 bg-gray-50 rounded-lg">
+                <div
+                  v-if="isAddingNote"
+                  class="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                >
                   <div class="space-y-3">
                     <div>
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-1"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                       >
                         Note Type
                       </label>
@@ -770,7 +810,7 @@ function handleClose() {
                     </div>
                     <div>
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-1"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                       >
                         Content
                       </label>
@@ -815,13 +855,16 @@ function handleClose() {
                     class="flex gap-3"
                   >
                     <div
-                      class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+                      class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center flex-shrink-0"
                     >
-                      <div class="w-2 h-2 bg-green-600 rounded-full"></div>
+                      <div
+                        class="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full"
+                      ></div>
                     </div>
                     <div class="flex-1 min-w-0">
                       <div class="flex items-center gap-2 mb-1">
-                        <span class="text-sm font-medium text-gray-900"
+                        <span
+                          class="text-sm font-medium text-gray-900 dark:text-white"
                           >Note</span
                         >
                         <UBadge
@@ -831,12 +874,14 @@ function handleClose() {
                         >
                           {{ note.type }}
                         </UBadge>
-                        <span class="text-xs text-gray-500">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">
                           {{ formatTimeAgo(new Date(note.timestamp)) }}
                         </span>
                       </div>
-                      <div class="bg-gray-50 rounded-lg p-3">
-                        <p class="text-sm text-gray-900 whitespace-pre-wrap">
+                      <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+                        <p
+                          class="text-sm text-gray-900 dark:text-white whitespace-pre-wrap"
+                        >
                           {{ note.content }}
                         </p>
                       </div>
@@ -846,9 +891,11 @@ function handleClose() {
                 <div v-else-if="!isAddingNote" class="text-center py-8">
                   <UIcon
                     name="i-lucide-sticky-note"
-                    class="w-8 h-8 text-gray-400 mx-auto mb-2"
+                    class="w-8 h-8 text-gray-400 dark:text-gray-500 mx-auto mb-2"
                   />
-                  <p class="text-sm text-gray-500">No notes yet</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    No notes yet
+                  </p>
                 </div>
               </div>
             </template>
@@ -863,24 +910,25 @@ function handleClose() {
                     class="flex gap-3"
                   >
                     <div
-                      class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"
+                      class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center flex-shrink-0"
                     >
                       <UIcon
                         name="i-lucide-arrow-right"
-                        class="w-3 h-3 text-blue-600"
+                        class="w-3 h-3 text-blue-600 dark:text-blue-400"
                       />
                     </div>
                     <div class="flex-1 min-w-0">
                       <div class="flex items-center gap-2 mb-1">
-                        <span class="text-sm font-medium text-gray-900"
+                        <span
+                          class="text-sm font-medium text-gray-900 dark:text-white"
                           >Status Changed</span
                         >
-                        <span class="text-xs text-gray-500">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">
                           {{ formatTimeAgo(new Date(transition.timestamp)) }}
                         </span>
                       </div>
-                      <div class="bg-gray-50 rounded-lg p-3">
-                        <p class="text-sm text-gray-900">
+                      <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+                        <p class="text-sm text-gray-900 dark:text-white">
                           {{
                             transition.fromStage
                               ? getStageLabel(transition.fromStage)
@@ -891,7 +939,7 @@ function handleClose() {
                         </p>
                         <p
                           v-if="transition.notes"
-                          class="text-sm text-gray-600 mt-1"
+                          class="text-sm text-gray-600 dark:text-gray-300 mt-1"
                         >
                           {{ transition.notes }}
                         </p>
@@ -902,9 +950,11 @@ function handleClose() {
                 <div v-else class="text-center py-8">
                   <UIcon
                     name="i-lucide-activity"
-                    class="w-8 h-8 text-gray-400 mx-auto mb-2"
+                    class="w-8 h-8 text-gray-400 dark:text-gray-500 mx-auto mb-2"
                   />
-                  <p class="text-sm text-gray-500">No activity yet</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    No activity yet
+                  </p>
                 </div>
               </div>
             </template>
@@ -915,13 +965,13 @@ function handleClose() {
                 <!-- Add Communication Form -->
                 <div
                   v-if="isAddingCommunication"
-                  class="mb-6 p-4 bg-gray-50 rounded-lg"
+                  class="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
                 >
                   <div class="space-y-3">
                     <div class="grid grid-cols-2 gap-3">
                       <div>
                         <label
-                          class="block text-sm font-medium text-gray-700 mb-1"
+                          class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                         >
                           Type
                         </label>
@@ -937,7 +987,7 @@ function handleClose() {
                       </div>
                       <div>
                         <label
-                          class="block text-sm font-medium text-gray-700 mb-1"
+                          class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                         >
                           Direction
                         </label>
@@ -952,7 +1002,7 @@ function handleClose() {
                     </div>
                     <div>
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-1"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                       >
                         Contact Person (Optional)
                       </label>
@@ -963,7 +1013,7 @@ function handleClose() {
                     </div>
                     <div v-if="newCommunication.type === 'email'">
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-1"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                       >
                         Subject (Optional)
                       </label>
@@ -974,7 +1024,7 @@ function handleClose() {
                     </div>
                     <div>
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-1"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                       >
                         Content
                       </label>
@@ -1023,7 +1073,7 @@ function handleClose() {
                     class="flex gap-3"
                   >
                     <div
-                      class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0"
+                      class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center flex-shrink-0"
                     >
                       <UIcon
                         :name="
@@ -1033,12 +1083,14 @@ function handleClose() {
                             ? 'i-lucide-phone'
                             : 'i-lucide-message-circle'
                         "
-                        class="w-3 h-3 text-purple-600"
+                        class="w-3 h-3 text-purple-600 dark:text-purple-400"
                       />
                     </div>
                     <div class="flex-1 min-w-0">
                       <div class="flex items-center gap-2 mb-1">
-                        <span class="text-sm font-medium text-gray-900">
+                        <span
+                          class="text-sm font-medium text-gray-900 dark:text-white"
+                        >
                           {{ comm.contactPerson || 'Communication' }}
                         </span>
                         <UBadge
@@ -1050,18 +1102,20 @@ function handleClose() {
                         >
                           {{ comm.direction }} {{ comm.type }}
                         </UBadge>
-                        <span class="text-xs text-gray-500">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">
                           {{ formatTimeAgo(new Date(comm.timestamp)) }}
                         </span>
                       </div>
-                      <div class="bg-gray-50 rounded-lg p-3">
+                      <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
                         <p
                           v-if="comm.subject"
-                          class="text-sm font-medium text-gray-900 mb-1"
+                          class="text-sm font-medium text-gray-900 dark:text-white mb-1"
                         >
                           {{ comm.subject }}
                         </p>
-                        <p class="text-sm text-gray-900 whitespace-pre-wrap">
+                        <p
+                          class="text-sm text-gray-900 dark:text-white whitespace-pre-wrap"
+                        >
                           {{ comm.content }}
                         </p>
                       </div>
@@ -1074,9 +1128,11 @@ function handleClose() {
                 >
                   <UIcon
                     name="i-lucide-message-circle"
-                    class="w-8 h-8 text-gray-400 mx-auto mb-2"
+                    class="w-8 h-8 text-gray-400 dark:text-gray-500 mx-auto mb-2"
                   />
-                  <p class="text-sm text-gray-500">No communications yet</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    No communications yet
+                  </p>
                 </div>
               </div>
             </template>
@@ -1090,7 +1146,7 @@ function handleClose() {
         class="flex flex-col items-center justify-center py-8 space-y-4"
       >
         <UIcon name="i-lucide-loader-2" class="w-6 h-6 animate-spin" />
-        <p class="text-sm text-gray-500">
+        <p class="text-sm text-gray-500 dark:text-gray-400">
           {{ loading ? 'Loading...' : 'No job application selected' }}
         </p>
       </div>

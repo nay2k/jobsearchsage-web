@@ -488,7 +488,9 @@ function cancelAddCommunication() {
           <div class="grid grid-cols-1 gap-4">
             <!-- Job Title -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Job Title
               </label>
               <UInput
@@ -503,7 +505,9 @@ function cancelAddCommunication() {
 
             <!-- Company -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Company
               </label>
               <UInput
@@ -518,7 +522,9 @@ function cancelAddCommunication() {
 
             <!-- Location -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Location
               </label>
               <UInput
@@ -533,7 +539,9 @@ function cancelAddCommunication() {
 
             <!-- Salary Range -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Salary Range
               </label>
               <UInput
@@ -548,7 +556,9 @@ function cancelAddCommunication() {
 
             <!-- Job URL -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Job Posting URL
               </label>
               <UInput
@@ -566,13 +576,17 @@ function cancelAddCommunication() {
                   View Original Posting
                   <UIcon name="i-lucide-external-link" class="w-3 h-3 ml-1" />
                 </ULink>
-                <span v-else class="text-gray-500">No URL provided</span>
+                <span v-else class="text-gray-500 dark:text-gray-400"
+                  >No URL provided</span
+                >
               </div>
             </div>
 
             <!-- Source -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Source
               </label>
               <UInput
@@ -587,7 +601,9 @@ function cancelAddCommunication() {
 
             <!-- Priority -->
             <div v-if="isEditing">
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Priority
               </label>
               <USelect
@@ -604,7 +620,9 @@ function cancelAddCommunication() {
 
             <!-- Stage -->
             <div v-if="isEditing">
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Stage
               </label>
               <USelect
@@ -623,7 +641,9 @@ function cancelAddCommunication() {
 
           <!-- Description -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >
               Job Description
             </label>
             <UTextarea
@@ -639,7 +659,9 @@ function cancelAddCommunication() {
               >
                 {{ selectedJobApplication.description }}
               </p>
-              <span v-else class="text-gray-500">No description provided</span>
+              <span v-else class="text-gray-500 dark:text-gray-400"
+                >No description provided</span
+              >
             </div>
           </div>
         </div>
@@ -651,7 +673,7 @@ function cancelAddCommunication() {
             <div
               v-for="transition in sortedStageHistory"
               :key="transition.id"
-              class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+              class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
             >
               <div>
                 <p class="text-sm font-medium">
@@ -663,13 +685,16 @@ function cancelAddCommunication() {
                   →
                   {{ getStageLabel(transition.toStage) }}
                 </p>
-                <p v-if="transition.notes" class="text-xs text-gray-600 mt-1">
+                <p
+                  v-if="transition.notes"
+                  class="text-xs text-gray-600 dark:text-gray-300 mt-1"
+                >
                   {{ transition.notes }}
                 </p>
               </div>
               <time
                 :datetime="new Date(transition.timestamp).toISOString()"
-                class="text-xs text-gray-500"
+                class="text-xs text-gray-500 dark:text-gray-400"
               >
                 {{ formatTimeAgo(new Date(transition.timestamp)) }}
               </time>
@@ -693,10 +718,15 @@ function cancelAddCommunication() {
           </div>
 
           <!-- Add Note Form -->
-          <div v-if="isAddingNote" class="mb-4 p-4 bg-gray-50 rounded-lg">
+          <div
+            v-if="isAddingNote"
+            class="mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+          >
             <div class="space-y-3">
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Note Type
                 </label>
                 <USelect
@@ -712,7 +742,9 @@ function cancelAddCommunication() {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Content
                 </label>
                 <UTextarea
@@ -741,7 +773,7 @@ function cancelAddCommunication() {
             <div
               v-for="note in sortedNotes"
               :key="note.id"
-              class="p-3 bg-gray-50 rounded-lg"
+              class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
             >
               <div class="flex items-center justify-between mb-2">
                 <UBadge
@@ -753,7 +785,7 @@ function cancelAddCommunication() {
                 </UBadge>
                 <time
                   :datetime="new Date(note.timestamp).toISOString()"
-                  class="text-xs text-gray-500"
+                  class="text-xs text-gray-500 dark:text-gray-400"
                 >
                   {{ formatTimeAgo(new Date(note.timestamp)) }}
                 </time>
@@ -763,7 +795,10 @@ function cancelAddCommunication() {
               </p>
             </div>
           </div>
-          <p v-else-if="!isAddingNote" class="text-sm text-gray-500">
+          <p
+            v-else-if="!isAddingNote"
+            class="text-sm text-gray-500 dark:text-gray-400"
+          >
             No notes yet
           </p>
         </div>
@@ -786,12 +821,14 @@ function cancelAddCommunication() {
           <!-- Add Communication Form -->
           <div
             v-if="isAddingCommunication"
-            class="mb-4 p-4 bg-gray-50 rounded-lg"
+            class="mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
           >
             <div class="space-y-3">
               <div class="grid grid-cols-2 gap-3">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     Type
                   </label>
                   <USelect
@@ -807,7 +844,9 @@ function cancelAddCommunication() {
                   />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     Direction
                   </label>
                   <USelect
@@ -822,7 +861,9 @@ function cancelAddCommunication() {
                 </div>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Contact Person (Optional)
                 </label>
                 <UInput
@@ -831,7 +872,9 @@ function cancelAddCommunication() {
                 />
               </div>
               <div v-if="newCommunication.type === 'email'">
-                <label class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Subject (Optional)
                 </label>
                 <UInput
@@ -840,7 +883,9 @@ function cancelAddCommunication() {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Content
                 </label>
                 <UTextarea
@@ -873,7 +918,7 @@ function cancelAddCommunication() {
             <div
               v-for="comm in sortedCommunications"
               :key="comm.id"
-              class="p-3 bg-gray-50 rounded-lg"
+              class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
             >
               <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-2">
@@ -884,13 +929,16 @@ function cancelAddCommunication() {
                   >
                     {{ comm.direction }} {{ comm.type }}
                   </UBadge>
-                  <span v-if="comm.contactPerson" class="text-xs text-gray-600">
+                  <span
+                    v-if="comm.contactPerson"
+                    class="text-xs text-gray-600 dark:text-gray-300"
+                  >
                     {{ comm.contactPerson }}
                   </span>
                 </div>
                 <time
                   :datetime="new Date(comm.timestamp).toISOString()"
-                  class="text-xs text-gray-500"
+                  class="text-xs text-gray-500 dark:text-gray-400"
                 >
                   {{ formatTimeAgo(new Date(comm.timestamp)) }}
                 </time>
@@ -903,7 +951,10 @@ function cancelAddCommunication() {
               </p>
             </div>
           </div>
-          <p v-else-if="!isAddingCommunication" class="text-sm text-gray-500">
+          <p
+            v-else-if="!isAddingCommunication"
+            class="text-sm text-gray-500 dark:text-gray-400"
+          >
             No communications yet
           </p>
         </div>
@@ -924,8 +975,13 @@ function cancelAddCommunication() {
         </div>
 
         <!-- Metadata -->
-        <div v-if="!isCreatingNew" class="pt-4 border-t border-gray-200">
-          <div class="grid grid-cols-2 gap-4 text-sm text-gray-600">
+        <div
+          v-if="!isCreatingNew"
+          class="pt-4 border-t border-gray-200 dark:border-gray-700"
+        >
+          <div
+            class="grid grid-cols-2 gap-4 text-sm text-gray-600 dark:text-gray-300"
+          >
             <div>
               <span class="font-medium">Added:</span>
               {{ formatDate(selectedJobApplication.dateAdded) }}
@@ -944,7 +1000,7 @@ function cancelAddCommunication() {
         class="flex flex-col items-center justify-center py-8 space-y-4"
       >
         <UIcon name="i-lucide-loader-2" class="w-6 h-6 animate-spin" />
-        <p class="text-sm text-gray-500">
+        <p class="text-sm text-gray-500 dark:text-gray-400">
           {{ loading ? 'Loading...' : 'No job application selected' }}
         </p>
       </div>

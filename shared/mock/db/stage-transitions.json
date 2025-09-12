@@ -32,38 +32,6 @@
     "jobApplicationId": "10"
   },
   {
-    "id": "st_1757606685388_h86oinc",
-    "fromStage": "rejected",
-    "toStage": "offer",
-    "timestamp": "2025-09-11T16:04:45.388Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "9"
-  },
-  {
-    "id": "st_1757606708001_yurqcbf",
-    "fromStage": "offer",
-    "toStage": "rejected",
-    "timestamp": "2025-09-11T16:05:08.001Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "9"
-  },
-  {
-    "id": "st_1757606962449_n7hqltq",
-    "fromStage": "rejected",
-    "toStage": "offer",
-    "timestamp": "2025-09-11T16:09:22.449Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "9"
-  },
-  {
-    "id": "st_1757606968484_4ghsh0u",
-    "fromStage": "offer",
-    "toStage": "rejected",
-    "timestamp": "2025-09-11T16:09:28.484Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "9"
-  },
-  {
     "id": "st_1757606435206_6ffrlvu",
     "fromStage": "final",
     "toStage": "interview",
@@ -588,5 +556,45 @@
     "timestamp": "2025-09-12T17:43:39.000Z",
     "notes": "Job application created",
     "jobApplicationId": "job_1757699019000_m740mnh"
+  },
+  {
+    "id": "st_1757606685388_h86oinc",
+    "fromStage": "rejected",
+    "toStage": "offer",
+    "timestamp": "2025-09-11T16:04:45.388Z",
+    "notes": "Stage updated via API",
+    "jobApplicationId": "9"
+  },
+  {
+    "id": "st_1757606708001_yurqcbf",
+    "fromStage": "offer",
+    "toStage": "rejected",
+    "timestamp": "2025-09-11T16:05:08.001Z",
+    "notes": "Stage updated via API",
+    "jobApplicationId": "9"
+  },
+  {
+    "id": "st_1757606962449_n7hqltq",
+    "fromStage": "rejected",
+    "toStage": "offer",
+    "timestamp": "2025-09-11T16:09:22.449Z",
+    "notes": "Stage updated via API",
+    "jobApplicationId": "9"
+  },
+  {
+    "id": "st_1757606968484_4ghsh0u",
+    "fromStage": "offer",
+    "toStage": "rejected",
+    "timestamp": "2025-09-11T16:09:28.484Z",
+    "notes": "Stage updated via API",
+    "jobApplicationId": "9"
+  },
+  {
+    "id": "st_1757705629271_vwtkdob",
+    "fromStage": "rejected",
+    "toStage": "applied",
+    "timestamp": "2025-09-12T19:33:49.271Z",
+    "notes": "Stage updated via API",
+    "jobApplicationId": "9"
   }
 ]

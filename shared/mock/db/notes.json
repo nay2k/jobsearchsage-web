@@ -1,23 +1,23 @@
 [
   {
-    "id": "n6",
-    "jobApplicationId": "9",
-    "content": "Feedback: Need more React Native experience",
-    "timestamp": "2025-11-01T00:00:00.000Z",
-    "type": "interview"
-  },
-  {
     "id": "n7",
     "jobApplicationId": "10",
     "content": "Decided to focus on development roles instead",
-    "timestamp": "2025-10-20T00:00:00.000Z",
+    "timestamp": "2025-08-20T00:00:00.000Z",
     "type": "general"
+  },
+  {
+    "id": "n6",
+    "content": "Feedback: Need more React Native experience",
+    "timestamp": "2025-07-01T00:00:00.000Z",
+    "type": "interview",
+    "jobApplicationId": "9"
   },
   {
     "id": "note_1757698777149_pmlvqzw",
     "content": "need to stop stuttering",
+    "timestamp": "2025-09-10T17:39:37.149Z",
     "type": "interview",
-    "timestamp": "2025-09-12T17:39:37.149Z",
     "jobApplicationId": "9"
   }
 ]
