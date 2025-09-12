@@ -4,24 +4,20 @@ import {
   type JobApplication,
   type PipelineStage,
 } from '#shared/types/job-tracker';
-import { useJobApplicationStore } from '~/stores/useJobApplicationStore';
-import { storeToRefs } from 'pinia';
-import { useJobApplicationDragAndDrop } from '~/composables/useDragAndDrop';
 import KanbanColumn from './KanbanColumn.vue';
 
-// Initialize store
-const jobApplicationStore = useJobApplicationStore();
+// Props received from parent page
+defineProps<{
+  loading: boolean;
+  searchQuery: string;
+  jobApplicationsByStage: Record<PipelineStage, JobApplication[]>;
+}>();
 
-// Get reactive state from store
-const { loading, error, searchQuery, jobApplicationsByStage } =
-  storeToRefs(jobApplicationStore);
-
-// Get actions from store
-const { fetchJobApplications, setSearchQuery, clearError } =
-  jobApplicationStore;
-
-// Get the move function from our composable
-const { moveJobApplication } = useJobApplicationDragAndDrop();
+// Events emitted to parent page
+const emit = defineEmits<{
+  'search-input': [event: Event];
+  'move-application': [application: JobApplication, targetStage: PipelineStage];
+}>();
 
 // Static stage titles for display
 const stageDisplayNames = {
@@ -35,58 +31,22 @@ const stageDisplayNames = {
   withdrawn: 'Withdrawn',
 } as const;
 
-// Initialize data on component mount
-onMounted(async () => {
-  try {
-    await fetchJobApplications();
-  } catch (err) {
-    console.error('Failed to load job applications:', err);
-  }
-});
-
 // Handle search input
 function handleSearchInput(event: Event) {
-  const target = event.target as HTMLInputElement;
-  setSearchQuery(target.value);
-}
-
-// Clear error when user interacts
-function handleClearError() {
-  clearError();
+  emit('search-input', event);
 }
 
 // Handle job application moves between stages
-async function handleMoveApplication(
+function handleMoveApplication(
   application: JobApplication,
   targetStage: PipelineStage
 ) {
-  console.log(
-    `Moving "${application.title}" from ${application.stage} to ${targetStage}`
-  );
-
-  try {
-    await moveJobApplication(application, targetStage);
-    console.log('Successfully moved job application');
-  } catch (error) {
-    console.error('Failed to move job application:', error);
-    // Error is already handled by the store and displayed in the UI
-  }
+  emit('move-application', application, targetStage);
 }
 </script>
 
 <template>
   <div class="w-full h-full pr-2">
-    <!-- Error Alert -->
-    <UAlert
-      v-if="error"
-      color="error"
-      variant="soft"
-      :title="error"
-      :close-button="{ icon: 'i-lucide-x', color: 'gray', variant: 'link' }"
-      class="mb-4"
-      @close="handleClearError"
-    />
-
     <!-- Board Header -->
     <div
       class="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
@@ -115,13 +75,22 @@ async function handleMoveApplication(
 
     <!-- Loading State -->
     <div
-      v-if="loading && !jobApplicationStore.jobApplications.length"
+      v-if="
+        loading &&
+        Object.values(jobApplicationsByStage).every((apps) => apps.length === 0)
+      "
       class="flex items-center justify-center h-64"
     >
       <div class="text-center">
-        <USkeleton class="h-8 w-8 rounded-full mx-auto mb-4" />
+        <UIcon
+          name="i-lucide-loader-circle"
+          class="h-8 w-8 animate-spin mx-auto mb-4 text-primary-500"
+        />
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Loading applications...
+        </p>
+        <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+          This may take a moment
         </p>
       </div>
     </div>

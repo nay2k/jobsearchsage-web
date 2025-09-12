@@ -19,26 +19,8 @@
     "source": "LinkedIn"
   },
   {
-    "id": "4",
-    "title": "DevOps Engineer",
-    "company": "CloudNative Co.",
-    "location": "Seattle, WA",
-    "url": "https://cloudnative.com/jobs/devops",
-    "salaryRange": "$110,000 - $140,000",
-    "stage": "applied",
-    "dateAdded": "2025-09-06T00:00:00.000Z",
-    "tags": [
-      "devops",
-      "aws",
-      "terraform",
-      "docker"
-    ],
-    "priority": "low",
-    "source": "Indeed"
-  },
-  {
     "id": "5",
-    "title": "Product Manager",
+    "title": "Product Manager2",
     "company": "InnovateTech",
     "location": "New York, NY",
     "url": "https://innovatetech.com/careers/pm",
@@ -86,23 +68,6 @@
     ],
     "priority": "high",
     "source": "LinkedIn"
-  },
-  {
-    "id": "8",
-    "title": "Data Scientist",
-    "company": "AI Innovations",
-    "location": "Boston, MA",
-    "url": "https://aiinnovations.com/jobs/data-scientist",
-    "salaryRange": "$120,000 - $150,000",
-    "stage": "interview",
-    "dateAdded": "2025-09-30T00:00:00.000Z",
-    "tags": [
-      "data-science",
-      "python",
-      "machine-learning"
-    ],
-    "priority": "high",
-    "source": "Glassdoor"
   },
   {
     "id": "9",
@@ -173,5 +138,30 @@
     ],
     "priority": "low",
     "source": "Remote.co"
+  },
+  {
+    "id": "job_1757677925505_o3ze46j",
+    "title": "Test 2",
+    "company": "ABC Corp",
+    "location": "Remote",
+    "url": "",
+    "description": "",
+    "salaryRange": "",
+    "stage": "researched",
+    "dateAdded": "2025-09-12T11:52:05.505Z",
+    "stageHistory": [
+      {
+        "id": "st_1757677925505_e6btuhy",
+        "fromStage": null,
+        "toStage": "researched",
+        "timestamp": "2025-09-12T11:52:05.505Z",
+        "notes": "Job application created"
+      }
+    ],
+    "notes": [],
+    "communications": [],
+    "tags": [],
+    "priority": "medium",
+    "source": "Manual Entry"
   }
 ]

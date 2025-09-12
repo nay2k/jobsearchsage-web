@@ -13,8 +13,34 @@ const {
   closeJobApplicationSlideover,
   isCreatingNew,
 } = useJobApplicationTracker();
-const jobApplicationStore = useJobApplicationStore();
-const toast = useToast();
+
+// Props and emits
+const props = defineProps<{
+  selectedJobApplication: JobApplication | null;
+  loading?: boolean;
+}>();
+
+const emit = defineEmits<{
+  'job-created': [
+    jobData: Omit<JobApplication, 'id' | 'dateAdded' | 'stageHistory'>
+  ];
+  'job-updated': [jobId: string, updates: Partial<JobApplication>];
+  'job-deleted': [jobId: string];
+  'note-added': [
+    jobId: string,
+    noteData: { content: string; type: Note['type'] }
+  ];
+  'communication-added': [
+    jobId: string,
+    commData: {
+      type: Communication['type'];
+      direction: Communication['direction'];
+      subject?: string;
+      content: string;
+      contactPerson?: string;
+    }
+  ];
+}>();
 
 // Form state
 const formData = ref<Partial<JobApplication>>({});
@@ -62,10 +88,7 @@ const selectedJobApplication = computed(() => {
     } as JobApplication;
   }
 
-  if (!selectedJobApplicationId.value) return null;
-  return jobApplicationStore.jobApplications.find(
-    (app) => app.id === selectedJobApplicationId.value
-  );
+  return props.selectedJobApplication;
 });
 
 // Watch for changes in selected job application
@@ -124,8 +147,8 @@ async function handleSave() {
   isSaving.value = true;
   try {
     if (isCreatingNew.value) {
-      // Create new job application
-      const newJobApplication = await jobApplicationStore.createJobApplication({
+      // Emit job creation event
+      emit('job-created', {
         title: formData.value.title!,
         company: formData.value.company!,
         location: formData.value.location,
@@ -136,50 +159,35 @@ async function handleSave() {
         tags: formData.value.tags || [],
         priority: formData.value.priority || 'medium',
         source: formData.value.source || 'Manual Entry',
+        stage: formData.value.stage || 'researched',
+        notes: formData.value.notes || [],
+        communications: formData.value.communications || [],
       });
 
-      // If there are notes or communications in the draft, update the job application
-      if (
-        (formData.value.notes && formData.value.notes.length > 0) ||
-        (formData.value.communications &&
-          formData.value.communications.length > 0)
-      ) {
-        await jobApplicationStore.updateJobApplication(newJobApplication.id, {
-          notes: formData.value.notes || [],
-          communications: formData.value.communications || [],
-        });
-      }
-
-      toast.add({
-        title: 'Success',
-        description: 'Job application created successfully',
-        color: 'success',
-      });
-
-      // Close the slideover after successful creation
+      // Close the slideover after emitting creation event
       closeJobApplicationSlideover();
     } else if (selectedJobApplicationId.value) {
-      // Update existing job application
-      await jobApplicationStore.updateJobApplication(
-        selectedJobApplicationId.value,
-        formData.value
-      );
+      // Clean the form data before emitting
+      const cleanFormData = {
+        title: formData.value.title,
+        company: formData.value.company,
+        location: formData.value.location,
+        url: formData.value.url,
+        description: formData.value.description,
+        salaryRange: formData.value.salaryRange,
+        applicationDeadline: formData.value.applicationDeadline,
+        priority: formData.value.priority,
+        source: formData.value.source,
+        stage: formData.value.stage,
+        tags: formData.value.tags,
+      };
+
+      // Emit job update event
+      emit('job-updated', selectedJobApplicationId.value, cleanFormData);
       isEditing.value = false;
-      toast.add({
-        title: 'Success',
-        description: 'Job application updated successfully',
-        color: 'success',
-      });
     }
   } catch (error) {
     console.error('Failed to save job application:', error);
-    toast.add({
-      title: 'Error',
-      description: isCreatingNew.value
-        ? 'Failed to create job application'
-        : 'Failed to update job application',
-      color: 'error',
-    });
   } finally {
     isSaving.value = false;
   }
@@ -204,25 +212,13 @@ async function handleDelete() {
 
   isDeleting.value = true;
   try {
-    await jobApplicationStore.deleteJobApplication(
-      selectedJobApplicationId.value
-    );
+    // Emit job deletion event
+    emit('job-deleted', selectedJobApplicationId.value);
 
-    toast.add({
-      title: 'Success',
-      description: 'Job application deleted successfully',
-      color: 'success',
-    });
-
-    // Close the panel after successful deletion
+    // Close the panel after emitting deletion event
     closeJobApplicationSlideover();
   } catch (error) {
     console.error('Failed to delete job application:', error);
-    toast.add({
-      title: 'Error',
-      description: 'Failed to delete job application',
-      color: 'error',
-    });
   } finally {
     isDeleting.value = false;
     showDeleteConfirm.value = false;
@@ -292,32 +288,17 @@ async function handleAddNote() {
       type: 'general',
     };
     isAddingNote.value = false;
-
-    toast.add({
-      title: 'Success',
-      description: 'Note added to draft',
-      color: 'success',
-    });
     return;
   }
 
   if (!selectedJobApplicationId.value || !newNote.value.content.trim()) return;
 
   try {
-    // Add note via API
-    await $fetch(
-      `/api/job-applications/${selectedJobApplicationId.value}/notes`,
-      {
-        method: 'POST',
-        body: {
-          content: newNote.value.content.trim(),
-          type: newNote.value.type,
-        },
-      }
-    );
-
-    // Refresh the job application data to get the updated notes
-    await jobApplicationStore.fetchJobApplications();
+    // Emit note addition event
+    emit('note-added', selectedJobApplicationId.value, {
+      content: newNote.value.content.trim(),
+      type: newNote.value.type,
+    });
 
     // Reset form
     newNote.value = {
@@ -325,19 +306,8 @@ async function handleAddNote() {
       type: 'general',
     };
     isAddingNote.value = false;
-
-    toast.add({
-      title: 'Success',
-      description: 'Note added successfully',
-      color: 'success',
-    });
   } catch (error) {
     console.error('Failed to add note:', error);
-    toast.add({
-      title: 'Error',
-      description: 'Failed to add note',
-      color: 'error',
-    });
   }
 }
 
@@ -377,12 +347,6 @@ async function handleAddCommunication() {
       contactPerson: '',
     };
     isAddingCommunication.value = false;
-
-    toast.add({
-      title: 'Success',
-      description: 'Communication added to draft',
-      color: 'success',
-    });
     return;
   }
 
@@ -390,34 +354,14 @@ async function handleAddCommunication() {
     return;
 
   try {
-    const communicationData = {
-      id: crypto.randomUUID(),
+    // Emit communication addition event
+    emit('communication-added', selectedJobApplicationId.value, {
       type: newCommunication.value.type,
       direction: newCommunication.value.direction,
       subject: newCommunication.value.subject.trim() || undefined,
       content: newCommunication.value.content.trim(),
       contactPerson: newCommunication.value.contactPerson.trim() || undefined,
-      timestamp: new Date(),
-    };
-
-    // Add communication via API
-    await $fetch(
-      `/api/job-applications/${selectedJobApplicationId.value}/communications`,
-      {
-        method: 'POST',
-        body: {
-          type: newCommunication.value.type,
-          direction: newCommunication.value.direction,
-          subject: newCommunication.value.subject.trim() || undefined,
-          content: newCommunication.value.content.trim(),
-          contactPerson:
-            newCommunication.value.contactPerson.trim() || undefined,
-        },
-      }
-    );
-
-    // Refresh the job application data to get the updated communications
-    await jobApplicationStore.fetchJobApplications();
+    });
 
     // Reset form
     newCommunication.value = {
@@ -428,19 +372,8 @@ async function handleAddCommunication() {
       contactPerson: '',
     };
     isAddingCommunication.value = false;
-
-    toast.add({
-      title: 'Success',
-      description: 'Communication added successfully',
-      color: 'success',
-    });
   } catch (error) {
     console.error('Failed to add communication:', error);
-    toast.add({
-      title: 'Error',
-      description: 'Failed to add communication',
-      color: 'error',
-    });
   }
 }
 
