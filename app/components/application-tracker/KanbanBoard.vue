@@ -9,14 +9,13 @@ import KanbanColumn from './KanbanColumn.vue';
 // Props received from parent page
 defineProps<{
   loading: boolean;
-  searchQuery: string;
   jobApplicationsByStage: Record<PipelineStage, JobApplication[]>;
 }>();
 
 // Events emitted to parent page
 const emit = defineEmits<{
-  'search-input': [event: Event];
   'move-application': [application: JobApplication, targetStage: PipelineStage];
+  'job-selected': [job: JobApplication];
 }>();
 
 // Static stage titles for display
@@ -31,11 +30,6 @@ const stageDisplayNames = {
   withdrawn: 'Withdrawn',
 } as const;
 
-// Handle search input
-function handleSearchInput(event: Event) {
-  emit('search-input', event);
-}
-
 // Handle job application moves between stages
 function handleMoveApplication(
   application: JobApplication,
@@ -46,9 +40,9 @@ function handleMoveApplication(
 </script>
 
 <template>
-  <div class="w-full h-full pr-2">
+  <div class="w-full">
     <!-- Board Header -->
-    <div
+    <!-- <div
       class="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
     >
       <div>
@@ -59,19 +53,7 @@ function handleMoveApplication(
           Drag and drop applications between stages
         </p>
       </div>
-
-      <!-- Search Input -->
-      <div class="w-full sm:w-80">
-        <UInput
-          :model-value="searchQuery"
-          placeholder="Search applications..."
-          icon="i-lucide-search"
-          size="md"
-          :loading="loading"
-          @input="handleSearchInput"
-        />
-      </div>
-    </div>
+    </div> -->
 
     <!-- Loading State -->
     <div
@@ -79,7 +61,7 @@ function handleMoveApplication(
         loading &&
         Object.values(jobApplicationsByStage).every((apps) => apps.length === 0)
       "
-      class="flex items-center justify-center h-64"
+      class="flex items-center justify-center"
     >
       <div class="text-center">
         <UIcon
@@ -98,10 +80,9 @@ function handleMoveApplication(
     <!-- Kanban Columns Container -->
     <div
       v-else
-      class="overflow-x-auto overflow-y-hidden pb-4"
-      style="height: calc(100vh - 200px)"
+      style="height: calc(100vh - (var(--ui-header-height) + 1.5rem))"
     >
-      <div class="flex gap-4 h-full" style="width: max-content">
+      <div class="flex gap-4 pb-4 h-full overflow-x-auto">
         <KanbanColumn
           v-for="stage in PIPELINE_STAGES"
           :key="stage"
@@ -109,6 +90,7 @@ function handleMoveApplication(
           :title="stageDisplayNames[stage]"
           :applications="jobApplicationsByStage[stage] || []"
           @move-application="handleMoveApplication"
+          @job-selected="(job) => emit('job-selected', job)"
         />
       </div>
     </div>

@@ -3,10 +3,6 @@ import type { JobApplication, PipelineStage } from '#shared/types/job-tracker';
 import { useJobApplicationDragAndDrop } from '~/composables/useDragAndDrop';
 import { storeToRefs } from 'pinia';
 
-const items = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
-const value = ref('Backlog');
-const isDetialViewOpen = true;
-
 // Set page metadata
 definePageMeta({
   title: 'Application Tracker',
@@ -263,57 +259,62 @@ async function handleCommunicationAdded(jobId: string, commData: unknown) {
 </script>
 
 <template>
-  <UDashboardPanel id="app-tracker">
+  <!-- Main Kanban Board Panel -->
+  <UDashboardPanel
+    id="application-tracker-board"
+    :default-size="70"
+    :min-size="60"
+    :max-size="100"
+    resizable
+  >
     <template #header>
-      <UDashboardNavbar title="Application Tracker">
+      <UDashboardNavbar title="Job Application Tracker">
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
+
         <template #right>
-          <div class="flex gap-6">
-            <UInput
-              :model-value="searchQuery"
-              placeholder="Search applications..."
-              icon="i-lucide-search"
-              size="md"
-              :loading="isLoading"
-              @input="handleSearchInput"
-            />
-            <UButton
-              color="primary"
-              variant="solid"
-              size="md"
-              icon="i-lucide-plus"
-              label="Add Job Application"
-              @click="handleCreateJobApplication"
-            />
-          </div>
+          <UButton
+            color="primary"
+            variant="solid"
+            size="md"
+            icon="i-lucide-plus"
+            label="Add Job Application"
+            @click="handleCreateJobApplication"
+          />
         </template>
       </UDashboardNavbar>
     </template>
 
     <template #body>
-      <div
-        class="w-full grid grid-cols-[70%_30%] gap-4 h-full"
-        :class="[
-          isDetialViewOpen ? 'grid-cols-[70%_30%]' : 'grid-cols-[100%_0%]',
-        ]"
-      >
-        <div class="">
-          <!-- Kanban Board -->
-          <ApplicationTrackerKanbanBoard
-            :loading="loading"
-            :search-query="searchQuery"
-            :job-applications-by-stage="jobApplicationsByStage"
-            @search-input="handleSearchInput"
-            @move-application="handleMoveApplication"
-            @job-selected="handleJobSelection"
-          />
-        </div>
-        <div v-if="isDetialViewOpen" class="bg-blue-50 p-4 rounded-md h-full">
-          <USelect v-model="value" :items="items" class="w-full h-6" />
-        </div>
-      </div>
+      <!-- Kanban Board -->
+      <ApplicationTrackerKanbanBoard
+        :loading="loading"
+        :search-query="searchQuery"
+        :job-applications-by-stage="jobApplicationsByStage"
+        @search-input="handleSearchInput"
+        @move-application="handleMoveApplication"
+        @job-selected="handleJobSelection"
+      />
     </template>
+  </UDashboardPanel>
+
+  <!-- Job Application Detail Panel - Always Visible for Testing -->
+  <UDashboardPanel
+    id="application-tracker-detail"
+    :default-size="30"
+    :min-size="25"
+    :max-size="40"
+    resizable
+  >
+    <ApplicationTrackerJobApplicationDetailPanel
+      :selected-job-application="selectedJob"
+      :loading="loading"
+      @job-created="handleJobCreated"
+      @job-updated="handleJobUpdated"
+      @job-deleted="handleJobDeleted"
+      @note-added="handleNoteAdded"
+      @communication-added="handleCommunicationAdded"
+    />
   </UDashboardPanel>
 </template>

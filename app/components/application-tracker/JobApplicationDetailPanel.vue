@@ -424,7 +424,7 @@ function cancelAddCommunication() {
     </div>
 
     <!-- Body -->
-    <div class="flex-1 overflow-y-auto px-4 py-4 min-h-0">
+    <div class="flex-1 overflow-visible px-4 py-4 min-h-0">
       <div v-if="selectedJobApplication" class="space-y-6">
         <!-- Header Actions -->
         <div class="flex items-center justify-between">
@@ -944,30 +944,9 @@ function cancelAddCommunication() {
         class="flex flex-col items-center justify-center py-8 space-y-4"
       >
         <UIcon name="i-lucide-loader-2" class="w-6 h-6 animate-spin" />
-        <div class="text-center text-sm text-gray-500 space-y-1">
-          <p>
-            <strong>Selected ID:</strong>
-            {{ selectedJobApplicationId || 'None' }}
-          </p>
-          <p>
-            <strong>Total Applications:</strong>
-            {{ jobApplicationStore.jobApplications.length }}
-          </p>
-          <p><strong>Loading:</strong> {{ jobApplicationStore.loading }}</p>
-          <p>
-            <strong>Error:</strong> {{ jobApplicationStore.error || 'None' }}
-          </p>
-          <div v-if="jobApplicationStore.jobApplications.length > 0">
-            <p><strong>Available IDs:</strong></p>
-            <div class="text-xs">
-              {{
-                jobApplicationStore.jobApplications
-                  .map((app) => app.id)
-                  .join(', ')
-              }}
-            </div>
-          </div>
-        </div>
+        <p class="text-sm text-gray-500">
+          {{ loading ? 'Loading...' : 'No job application selected' }}
+        </p>
       </div>
     </div>
   </div>

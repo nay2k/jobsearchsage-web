@@ -11,6 +11,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   moveApplication: [application: JobApplication, targetStage: PipelineStage];
+  jobSelected: [job: JobApplication];
 }>();
 
 // Track if we're currently processing a move to prevent interference
@@ -60,11 +61,11 @@ watch(
 
 <template>
   <div
-    class="flex flex-col bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 w-80 flex-shrink-0 h-full"
+    class="flex flex-col bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 w-90 flex-shrink-0"
   >
-    <!-- Column Header -->
+    <!-- Column Header - Fixed -->
     <div
-      class="p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-t-lg"
+      class="flex-shrink-0 p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-t-lg"
     >
       <div class="flex items-center justify-between">
         <h3 class="text-sm font-medium text-gray-900 dark:text-white">
@@ -79,13 +80,17 @@ watch(
       </div>
     </div>
 
-    <!-- Column Body - This is the draggable container -->
-    <div ref="columnRef" class="flex-1 p-3 space-y-3 overflow-y-auto min-h-32">
+    <!-- Column Body - Scrollable -->
+    <div
+      ref="columnRef"
+      class="flex-1 p-3 space-y-4 overflow-y-auto overflow-x-hidden min-h-0"
+    >
       <!-- Job Application Cards - These are the draggable items -->
       <JobApplicationCard
         v-for="jobApplication in applications"
         :key="jobApplication.id"
         :job-application="jobApplication"
+        @click="emit('jobSelected', jobApplication)"
       />
 
       <!-- Empty state for columns with no jobs -->
