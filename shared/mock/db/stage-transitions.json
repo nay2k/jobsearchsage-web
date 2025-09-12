@@ -336,150 +336,6 @@
     "jobApplicationId": "3"
   },
   {
-    "id": "st_1757604965026_vpe09va",
-    "fromStage": "applied",
-    "toStage": "researched",
-    "timestamp": "2025-09-11T15:36:05.026Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "6"
-  },
-  {
-    "id": "st_1757605167560_cnn6y3w",
-    "fromStage": "researched",
-    "toStage": "applied",
-    "timestamp": "2025-09-11T15:39:27.560Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "6"
-  },
-  {
-    "id": "st_1757606385901_abzlh8z",
-    "fromStage": "applied",
-    "toStage": "researched",
-    "timestamp": "2025-09-11T15:59:45.901Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "6"
-  },
-  {
-    "id": "st_1757606682587_ditstd5",
-    "fromStage": "researched",
-    "toStage": "applied",
-    "timestamp": "2025-09-11T16:04:42.587Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "6"
-  },
-  {
-    "id": "st_1757609699853_ca1p282",
-    "fromStage": "researched",
-    "toStage": "applied",
-    "timestamp": "2025-09-11T16:54:59.853Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "6"
-  },
-  {
-    "id": "st_1757609700096_ev7p9tw",
-    "fromStage": "applied",
-    "toStage": "phone_screen",
-    "timestamp": "2025-09-11T16:55:00.096Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "6"
-  },
-  {
-    "id": "st_1757609700676_28g1mlz",
-    "fromStage": "phone_screen",
-    "toStage": "applied",
-    "timestamp": "2025-09-11T16:55:00.676Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "6"
-  },
-  {
-    "id": "st1",
-    "fromStage": null,
-    "toStage": "researched",
-    "timestamp": "2024-11-01T00:00:00.000Z",
-    "notes": "Found this position on LinkedIn",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st2",
-    "fromStage": "researched",
-    "toStage": "applied",
-    "timestamp": "2024-11-03T00:00:00.000Z",
-    "notes": "Submitted application through company website",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st_1757508183489_qeh5h0o",
-    "fromStage": "applied",
-    "toStage": "interview",
-    "timestamp": "2025-09-10T12:43:03.489Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st_1757606439950_737iuvq",
-    "fromStage": "interview",
-    "toStage": "final",
-    "timestamp": "2025-09-11T16:00:39.950Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st_1757608987330_ns7kt5j",
-    "fromStage": "final",
-    "toStage": "interview",
-    "timestamp": "2025-09-11T16:43:07.330Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st_1757610328475_cyl6l32",
-    "fromStage": "interview",
-    "toStage": "phone_screen",
-    "timestamp": "2025-09-11T17:05:28.475Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st_1757610328662_dqww3ms",
-    "fromStage": "phone_screen",
-    "toStage": "applied",
-    "timestamp": "2025-09-11T17:05:28.662Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st_1757610328929_k6hya6x",
-    "fromStage": "applied",
-    "toStage": "researched",
-    "timestamp": "2025-09-11T17:05:28.929Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st_1757610329084_03z6ee9",
-    "fromStage": "researched",
-    "toStage": "applied",
-    "timestamp": "2025-09-11T17:05:29.084Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st_1757610329166_qfcvv8y",
-    "fromStage": "applied",
-    "toStage": "phone_screen",
-    "timestamp": "2025-09-11T17:05:29.166Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "1"
-  },
-  {
-    "id": "st_1757621175688_b1ht1pw",
-    "fromStage": "phone_screen",
-    "toStage": "interview",
-    "timestamp": "2025-09-11T20:06:15.688Z",
-    "notes": "Stage updated via API",
-    "jobApplicationId": "1"
-  },
-  {
     "id": "st_1757627666050_2v7kdbc",
     "fromStage": null,
     "toStage": "researched",
@@ -708,5 +564,29 @@
     "timestamp": "2025-09-12T11:52:05.505Z",
     "notes": "Job application created",
     "jobApplicationId": "job_1757677925505_o3ze46j"
+  },
+  {
+    "id": "st_1757698930461_brm64em",
+    "fromStage": null,
+    "toStage": "researched",
+    "timestamp": "2025-09-12T17:42:10.461Z",
+    "notes": "Job application created",
+    "jobApplicationId": "job_1757698930461_f523ldi"
+  },
+  {
+    "id": "st_1757698966016_faejmum",
+    "fromStage": null,
+    "toStage": "researched",
+    "timestamp": "2025-09-12T17:42:46.016Z",
+    "notes": "Job application created",
+    "jobApplicationId": "job_1757698966016_a7oty7y"
+  },
+  {
+    "id": "st_1757699019000_qdeou2g",
+    "fromStage": null,
+    "toStage": "researched",
+    "timestamp": "2025-09-12T17:43:39.000Z",
+    "notes": "Job application created",
+    "jobApplicationId": "job_1757699019000_m740mnh"
   }
 ]

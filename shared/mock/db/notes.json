@@ -1,12 +1,5 @@
 [
   {
-    "id": "n1",
-    "jobApplicationId": "1",
-    "content": "Great company culture, strong engineering team",
-    "timestamp": "2024-11-01T00:00:00.000Z",
-    "type": "research"
-  },
-  {
     "id": "n6",
     "jobApplicationId": "9",
     "content": "Feedback: Need more React Native experience",
@@ -19,5 +12,12 @@
     "content": "Decided to focus on development roles instead",
     "timestamp": "2025-10-20T00:00:00.000Z",
     "type": "general"
+  },
+  {
+    "id": "note_1757698777149_pmlvqzw",
+    "content": "need to stop stuttering",
+    "type": "interview",
+    "timestamp": "2025-09-12T17:39:37.149Z",
+    "jobApplicationId": "9"
   }
 ]

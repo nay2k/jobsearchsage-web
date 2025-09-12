@@ -3,9 +3,13 @@ import type { JobApplication, PipelineStage } from '#shared/types/job-tracker';
 import { useJobApplicationDragAndDrop } from '~/composables/useDragAndDrop';
 import { storeToRefs } from 'pinia';
 
-const items = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
-const value = ref('Backlog');
-const isDetialViewOpen = true;
+const isDetialViewOpen = ref(true);
+
+// Function to close the detail panel
+function closeDetailPanel() {
+  isDetialViewOpen.value = false;
+  selectedJob.value = null;
+}
 
 // Set page metadata
 definePageMeta({
@@ -21,11 +25,7 @@ useSeoMeta({
 });
 
 // Get slideover state for layout adjustment
-const {
-  isJobApplicationSlideoverOpen,
-  openNewJobApplicationSlideover,
-  selectedJobApplicationId,
-} = useJobApplicationTracker();
+const { openNewJobApplicationSlideover } = useJobApplicationTracker();
 
 // Initialize the job application store
 const jobApplicationStore = useJobApplicationStore();
@@ -47,6 +47,7 @@ const selectedJob = ref<JobApplication | null>(null);
 // Function to handle job selection
 function handleJobSelection(job: JobApplication) {
   selectedJob.value = job;
+  isDetialViewOpen.value = true;
 }
 
 // Load data on page mount
@@ -127,7 +128,12 @@ async function handleJobCreated(
   jobData: Omit<JobApplication, 'id' | 'dateAdded' | 'stageHistory'>
 ) {
   try {
-    await createJobApplication(jobData);
+    const newJobApplication = await createJobApplication(jobData);
+
+    // Select the newly created job application
+    selectedJob.value = newJobApplication;
+    isDetialViewOpen.value = true;
+
     toast.add({
       title: 'Success',
       description: 'Job application created successfully',
@@ -191,6 +197,10 @@ async function handleJobUpdated(
 async function handleJobDeleted(jobId: string) {
   try {
     await deleteJobApplication(jobId);
+
+    // Close the detail panel after successful deletion
+    closeDetailPanel();
+
     toast.add({
       title: 'Success',
       description: 'Job application deleted successfully',
@@ -220,6 +230,16 @@ async function handleNoteAdded(
     // Refresh job applications to get updated data
     await fetchJobApplications();
 
+    // Update the selected job with the refreshed data
+    if (selectedJob.value) {
+      const updatedJob = jobApplications.value.find(
+        (job) => job.id === selectedJob.value?.id
+      );
+      if (updatedJob) {
+        selectedJob.value = updatedJob;
+      }
+    }
+
     toast.add({
       title: 'Success',
       description: 'Note added successfully',
@@ -245,6 +265,16 @@ async function handleCommunicationAdded(jobId: string, commData: unknown) {
 
     // Refresh job applications to get updated data
     await fetchJobApplications();
+
+    // Update the selected job with the refreshed data
+    if (selectedJob.value) {
+      const updatedJob = jobApplications.value.find(
+        (job) => job.id === selectedJob.value?.id
+      );
+      if (updatedJob) {
+        selectedJob.value = updatedJob;
+      }
+    }
 
     toast.add({
       title: 'Success',
@@ -294,9 +324,9 @@ async function handleCommunicationAdded(jobId: string, commData: unknown) {
 
     <template #body>
       <div
-        class="w-full grid grid-cols-[70%_30%] gap-4 h-full"
+        class="w-full grid gap-4 h-full"
         :class="[
-          isDetialViewOpen ? 'grid-cols-[70%_30%]' : 'grid-cols-[100%_0%]',
+          isDetialViewOpen ? 'grid-cols-[65%_35%]' : 'grid-cols-[100%_0%]',
         ]"
       >
         <div class="">
@@ -310,8 +340,20 @@ async function handleCommunicationAdded(jobId: string, commData: unknown) {
             @job-selected="handleJobSelection"
           />
         </div>
-        <div v-if="isDetialViewOpen" class="bg-blue-50 p-4 rounded-md h-full">
-          <USelect v-model="value" :items="items" class="w-full h-6" />
+        <div
+          v-if="isDetialViewOpen && selectedJob"
+          class="bg-blue-50 rounded-md h-full border border-green-300"
+        >
+          <ApplicationTrackerJobApplicaitonDetail
+            :selected-job-application="selectedJob"
+            :loading="loading"
+            @job-created="handleJobCreated"
+            @job-updated="handleJobUpdated"
+            @job-deleted="handleJobDeleted"
+            @note-added="handleNoteAdded"
+            @communication-added="handleCommunicationAdded"
+            @close="closeDetailPanel"
+          />
         </div>
       </div>
     </template>

@@ -1,24 +1,5 @@
 [
   {
-    "id": "1",
-    "title": "Senior Frontend Developer",
-    "company": "TechCorp Inc.",
-    "location": "San Francisco, CA",
-    "url": "https://techcorp.com/careers/senior-frontend",
-    "description": "Looking for an experienced frontend developer to join our team...",
-    "salaryRange": "$120,000 - $150,000",
-    "applicationDeadline": "2025-09-20T00:00:00.000Z",
-    "stage": "interview",
-    "dateAdded": "2025-09-01T00:00:00.000Z",
-    "tags": [
-      "frontend",
-      "react",
-      "typescript"
-    ],
-    "priority": "high",
-    "source": "LinkedIn"
-  },
-  {
     "id": "5",
     "title": "Product Manager2",
     "company": "InnovateTech",
@@ -34,23 +15,6 @@
     ],
     "priority": "high",
     "source": "Company Website"
-  },
-  {
-    "id": "6",
-    "title": "Senior Software Engineer",
-    "company": "MegaCorp",
-    "location": "Mountain View, CA",
-    "url": "https://megacorp.com/jobs/senior-swe",
-    "salaryRange": "$150,000 - $200,000",
-    "stage": "applied",
-    "dateAdded": "2025-10-20T00:00:00.000Z",
-    "tags": [
-      "backend",
-      "java",
-      "distributed-systems"
-    ],
-    "priority": "high",
-    "source": "Referral"
   },
   {
     "id": "7",
@@ -155,6 +119,82 @@
         "fromStage": null,
         "toStage": "researched",
         "timestamp": "2025-09-12T11:52:05.505Z",
+        "notes": "Job application created"
+      }
+    ],
+    "notes": [],
+    "communications": [],
+    "tags": [],
+    "priority": "medium",
+    "source": "Manual Entry"
+  },
+  {
+    "id": "job_1757698930461_f523ldi",
+    "title": "Senior Software Engineer 2",
+    "company": "RHT",
+    "location": "Remte",
+    "url": "ddd",
+    "description": "dd",
+    "salaryRange": "ddddd",
+    "applicationDeadline": "2025-09-26T00:00:00.000Z",
+    "stage": "researched",
+    "dateAdded": "2025-09-12T17:42:10.461Z",
+    "stageHistory": [
+      {
+        "id": "st_1757698930461_brm64em",
+        "fromStage": null,
+        "toStage": "researched",
+        "timestamp": "2025-09-12T17:42:10.461Z",
+        "notes": "Job application created"
+      }
+    ],
+    "notes": [],
+    "communications": [],
+    "tags": [],
+    "priority": "high",
+    "source": "Manual Entry"
+  },
+  {
+    "id": "job_1757698966016_a7oty7y",
+    "title": "Tet engineer",
+    "company": "xtz",
+    "location": "",
+    "url": "",
+    "description": "",
+    "salaryRange": "",
+    "stage": "researched",
+    "dateAdded": "2025-09-12T17:42:46.016Z",
+    "stageHistory": [
+      {
+        "id": "st_1757698966016_faejmum",
+        "fromStage": null,
+        "toStage": "researched",
+        "timestamp": "2025-09-12T17:42:46.016Z",
+        "notes": "Job application created"
+      }
+    ],
+    "notes": [],
+    "communications": [],
+    "tags": [],
+    "priority": "medium",
+    "source": "Manual Entry"
+  },
+  {
+    "id": "job_1757699019000_m740mnh",
+    "title": "New JOb 2",
+    "company": "lets go",
+    "location": "",
+    "url": "",
+    "description": "",
+    "salaryRange": "",
+    "stage": "researched",
+    "dateAdded": "2025-09-12T17:43:39.000Z",
+    "stageHistory": [
+      {
+        "id": "st_1757699019000_qdeou2g",
+        "fromStage": null,
+        "toStage": "researched",
+        "timestamp": "2025-09-12T17:43:39.000Z",
         "notes": "Job application created"
       }
     ],
